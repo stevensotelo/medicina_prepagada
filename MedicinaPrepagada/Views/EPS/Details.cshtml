@@ -1,18 +1,18 @@
 ﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.EPS
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle EPS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalle</h2>
 
 <div>
     <h4>EPS</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nombre)
+            Nombre:
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.nit)
+            Nit:
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.telefono)
+            Teléfono:
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.nombre_contacto)
+            Nombre de contacto:
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.apellidos_contacto)
+            Apellidos de contacto:
         </dt>
 
         <dd>
@@ -52,15 +52,22 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.transferencia)
+            Pago por transferencia:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.transferencia)
+            @if(Model.transferencia)
+            {
+                <span>Si</span>
+            }
+            else
+            {
+                <span>No</span>
+            }
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.numero_cuenta)
+            Número de cuenta:
         </dt>
 
         <dd>
@@ -70,6 +77,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_eps }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id_eps }) |
+    @Html.ActionLink("Volver a la lista", "Index")
 </p>
