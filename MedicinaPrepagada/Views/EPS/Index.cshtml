@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.EPS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_contacto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellidos_contacto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.transferencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numero_cuenta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_contacto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellidos_contacto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.transferencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numero_cuenta)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_eps }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_eps }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_eps })
+        </td>
+    </tr>
+}
+
+</table>
