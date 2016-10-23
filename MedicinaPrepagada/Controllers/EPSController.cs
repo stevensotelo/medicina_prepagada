@@ -49,14 +49,25 @@ namespace MedicinaPrepagada.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "nombre,nit,telefono,nombre_contacto,apellidos_contacto,transferencia,numero_cuenta")] EPS ePS)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.agregar(ePS);
-                db.guardar();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.agregar(ePS);
+                    ePS.isValid();
+                    db.guardar();
+                    return RedirectToAction("Index");
+                }
 
-            return View(ePS);
+                return View(ePS);
+            }
+            catch(Exception ex)
+            {
+                foreach (var issue in ePS.GetReglasValidacion())
+                    ModelState.AddModelError(issue.propiedad, issue.mensaje);
+                return View(ePS);
+            }
+            
         }
 
         // GET: EPS/Edit/5
@@ -81,15 +92,25 @@ namespace MedicinaPrepagada.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_eps,nombre,nit,telefono,nombre_contacto,apellidos_contacto,transferencia,numero_cuenta")] EPS ePS)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //db.Entry(ePS).State = EntityState.Modified;
-                //db.SaveChanges();
-                db.editar(ePS);
-                db.guardar();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    //db.Entry(ePS).State = EntityState.Modified;
+                    //db.SaveChanges();
+                    db.editar(ePS);
+                    db.guardar();
+                    return RedirectToAction("Index");
+                }
+                return View(ePS);
             }
-            return View(ePS);
+            catch(Exception ex)
+            {
+                foreach (var issue in ePS.GetReglasValidacion())
+                    ModelState.AddModelError(issue.propiedad, issue.mensaje);
+                return View(ePS);
+            }
+            
         }
 
         // GET: EPS/Delete/5
