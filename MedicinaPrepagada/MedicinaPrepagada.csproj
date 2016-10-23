@@ -87,6 +87,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -163,6 +164,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Partial\EPS.cs" />
     <Compile Include="Models\DBMedicinaPrepagada\Repository\RepositoryEPS.cs" />
     <Compile Include="Models\DBMedicinaPrepagada\Source\EPS.cs">
       <DependentUpon>ModelMedicinaPrepagada.tt</DependentUpon>
@@ -182,6 +184,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelMedicinaPrepagada.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tools\ReglaValidacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +249,7 @@
     <Content Include="Views\EPS\Details.cshtml" />
     <Content Include="Views\EPS\Edit.cshtml" />
     <Content Include="Views\EPS\Index.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
