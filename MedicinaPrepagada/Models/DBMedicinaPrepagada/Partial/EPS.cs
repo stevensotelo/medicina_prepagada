@@ -29,7 +29,7 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
                 yield return new ReglaValidacion("El nombre es demasiado largo", "nombre");
             if (string.IsNullOrEmpty(nit))
                 yield return new ReglaValidacion("El nit esta vacío", "nit");
-            if (!string.IsNullOrEmpty(nombre) && nit.Length > 10)
+            if (!string.IsNullOrEmpty(nit) && nit.Length > 10)
                 yield return new ReglaValidacion("El nit es demasiado largo", "nit");
             if (string.IsNullOrEmpty(nombre_contacto))
                 yield return new ReglaValidacion("El nombre de contacto esta vacío", "nombre_contacto");

@@ -249,6 +249,7 @@
     <Content Include="Views\EPS\Details.cshtml" />
     <Content Include="Views\EPS\Edit.cshtml" />
     <Content Include="Views\EPS\Index.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

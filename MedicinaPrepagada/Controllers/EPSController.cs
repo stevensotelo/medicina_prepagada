@@ -54,7 +54,8 @@ namespace MedicinaPrepagada.Controllers
                 if (ModelState.IsValid)
                 {
                     db.agregar(ePS);
-                    ePS.isValid();
+                    if (!ePS.isValid())
+                        throw new Exception("La EPS no es valida");
                     db.guardar();
                     return RedirectToAction("Index");
                 }
@@ -96,9 +97,9 @@ namespace MedicinaPrepagada.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //db.Entry(ePS).State = EntityState.Modified;
-                    //db.SaveChanges();
                     db.editar(ePS);
+                    if (!ePS.isValid())
+                        throw new Exception("La EPS no es valida");
                     db.guardar();
                     return RedirectToAction("Index");
                 }
@@ -134,6 +135,10 @@ namespace MedicinaPrepagada.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             EPS ePS = db.buscarPorID(id);
+            if (ePS == null)
+            {
+                return HttpNotFound();
+            }
             db.eliminar(ePS);
             db.guardar();
             return RedirectToAction("Index");
