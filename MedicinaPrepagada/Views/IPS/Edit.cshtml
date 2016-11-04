@@ -1,11 +1,11 @@
-﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.EPS
+﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.IPS
 
 @{
-    ViewBag.Title = "Editar EPS";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Editar</h2>
+<h2>Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -13,13 +13,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>EPS</h4>
+        <h4>IPS</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id_eps)
+        @Html.HiddenFor(model => model.id_ips)
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="nombre">Nombre:</label>
+            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
@@ -27,7 +27,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="nit">Nit:</label>
+            @Html.LabelFor(model => model.nit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.nit, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.nit, "", new { @class = "text-danger" })
@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="telefono">Teléfono:</label>
+            @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="nombre_contacto">Nombre de contacto:</label>
+            @Html.LabelFor(model => model.nombre_contacto, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.nombre_contacto, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.nombre_contacto, "", new { @class = "text-danger" })
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="apellidos_contacto">Apellidos de contacto:</label>
+            @Html.LabelFor(model => model.apellidos_contacto, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.apellidos_contacto, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.apellidos_contacto, "", new { @class = "text-danger" })
@@ -59,7 +59,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="transferencia">Pago por transferencia:</label>
+            @Html.LabelFor(model => model.transferencia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.transferencia)
@@ -69,7 +69,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="numero_cuenta">Número de cuenta:</label>
+            @Html.LabelFor(model => model.numero_cuenta, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.numero_cuenta, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.numero_cuenta, "", new { @class = "text-danger" })
@@ -78,14 +78,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Volver a la lista", "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
