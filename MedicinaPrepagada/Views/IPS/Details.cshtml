@@ -1,18 +1,18 @@
-﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.EPS
+﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.IPS
 
 @{
-    ViewBag.Title = "Detalle EPS";
+    ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalle</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>EPS</h4>
+    <h4>IPS</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Nombre:
+            @Html.DisplayNameFor(model => model.nombre)
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            Nit:
+            @Html.DisplayNameFor(model => model.nit)
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            Teléfono:
+            @Html.DisplayNameFor(model => model.telefono)
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            Nombre de contacto:
+            @Html.DisplayNameFor(model => model.nombre_contacto)
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            Apellidos de contacto:
+            @Html.DisplayNameFor(model => model.apellidos_contacto)
         </dt>
 
         <dd>
@@ -52,22 +52,15 @@
         </dd>
 
         <dt>
-            Pago por transferencia:
+            @Html.DisplayNameFor(model => model.transferencia)
         </dt>
 
         <dd>
-            @if(Model.transferencia)
-            {
-                <span>Si</span>
-            }
-            else
-            {
-                <span>No</span>
-            }
+            @Html.DisplayFor(model => model.transferencia)
         </dd>
 
         <dt>
-            Número de cuenta:
+            @Html.DisplayNameFor(model => model.numero_cuenta)
         </dt>
 
         <dd>
@@ -77,6 +70,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.id_eps }) |
-    @Html.ActionLink("Volver a la lista", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_ips }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

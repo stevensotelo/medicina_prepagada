@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="57b2f2a604864b8c81ef03fdbde9572f" Name="Diagram1">
-        <EntityTypeShape EntityType="MMedicinaPrepagada.EPS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="80b5db2fa9074c858b06700326432737" Name="Diagram1">
+        <EntityTypeShape EntityType="DBPrepagadaModel.IPS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
