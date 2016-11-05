@@ -14,25 +14,39 @@ namespace MedicinaPrepagada.Controllers
     {
         private DBPrepagadaEntities db = new DBPrepagadaEntities();
 
-        // GET: IPS
+        // GET: IPS        
         public ActionResult Index()
         {
-            return View(db.IPS.ToList());
+            try
+            {
+                return View(db.IPS.ToList());
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
 
         // GET: IPS/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                IPS iPS = db.IPS.Find(id);
+                if (iPS == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(iPS);
             }
-            IPS iPS = db.IPS.Find(id);
-            if (iPS == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
-            return View(iPS);
         }
 
         // GET: IPS/Create
@@ -48,29 +62,44 @@ namespace MedicinaPrepagada.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_ips,nombre,nit,telefono,nombre_contacto,apellidos_contacto,transferencia,numero_cuenta")] IPS iPS)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.IPS.Add(iPS);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid && iPS.isValid)
+                {
+                    db.IPS.Add(iPS);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(iPS);
             }
-
-            return View(iPS);
+            catch (Exception ex)
+            {
+                foreach (var issue in iPS.GetReglasValidacion())
+                    ModelState.AddModelError(issue.propiedad, issue.mensaje);
+                return View(iPS);
+            }
         }
 
         // GET: IPS/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                IPS iPS = db.IPS.Find(id);
+                if (iPS == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(iPS);
             }
-            IPS iPS = db.IPS.Find(id);            
-            if (iPS == null)
+            catch(Exception ex)
             {
-                return HttpNotFound();
-            }
-            return View(iPS);
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }            
         }
 
         // POST: IPS/Edit/5
@@ -80,28 +109,44 @@ namespace MedicinaPrepagada.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_ips,nombre,nit,telefono,nombre_contacto,apellidos_contacto,transferencia,numero_cuenta")] IPS iPS)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(iPS).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid && iPS.isValid)
+                {
+                    db.Entry(iPS).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(iPS);
             }
-            return View(iPS);
+            catch (Exception ex)
+            {
+                foreach (var issue in iPS.GetReglasValidacion())
+                    ModelState.AddModelError(issue.propiedad, issue.mensaje);
+                return View(iPS);
+            }
         }
 
         // GET: IPS/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                IPS iPS = db.IPS.Find(id);
+                if (iPS == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(iPS);
             }
-            IPS iPS = db.IPS.Find(id);
-            if (iPS == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
-            return View(iPS);
         }
 
         // POST: IPS/Delete/5
@@ -109,10 +154,17 @@ namespace MedicinaPrepagada.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            IPS iPS = db.IPS.Find(id);
-            db.IPS.Remove(iPS);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                IPS iPS = db.IPS.Find(id);
+                db.IPS.Remove(iPS);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }            
         }
 
         protected override void Dispose(bool disposing)
