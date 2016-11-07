@@ -64,7 +64,7 @@ namespace MedicinaPrepagada.Controllers
         {
             try
             {
-                if (ModelState.IsValid && iPS.isValid)
+                //if (ModelState.IsValid && iPS.isValid)
                 {
                     db.IPS.Add(iPS);
                     db.SaveChanges();
@@ -74,10 +74,11 @@ namespace MedicinaPrepagada.Controllers
             }
             catch (Exception ex)
             {
-                foreach (var issue in iPS.GetReglasValidacion())
-                    ModelState.AddModelError(issue.propiedad, issue.mensaje);
+                //foreach (var issue in iPS.GetReglasValidacion())
+                //    ModelState.AddModelError(issue.propiedad, issue.mensaje);
                 return View(iPS);
             }
+      
         }
 
         // GET: IPS/Edit/5
@@ -111,7 +112,7 @@ namespace MedicinaPrepagada.Controllers
         {
             try
             {
-                if (ModelState.IsValid && iPS.isValid)
+                //if (ModelState.IsValid && iPS.isValid)
                 {
                     db.Entry(iPS).State = EntityState.Modified;
                     db.SaveChanges();
@@ -121,8 +122,8 @@ namespace MedicinaPrepagada.Controllers
             }
             catch (Exception ex)
             {
-                foreach (var issue in iPS.GetReglasValidacion())
-                    ModelState.AddModelError(issue.propiedad, issue.mensaje);
+                //foreach (var issue in iPS.GetReglasValidacion())
+                  //  ModelState.AddModelError(issue.propiedad, issue.mensaje);
                 return View(iPS);
             }
         }
