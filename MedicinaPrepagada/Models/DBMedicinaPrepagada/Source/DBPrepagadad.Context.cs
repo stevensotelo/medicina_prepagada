@@ -26,5 +26,15 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
         }
     
         public virtual DbSet<IPS> IPS { get; set; }
+        public virtual DbSet<Beneficiarios> Beneficiarios { get; set; }
+        public virtual DbSet<Condiciones> Condiciones { get; set; }
+        public virtual DbSet<Facturas> Facturas { get; set; }
+        public virtual DbSet<Facturas_Beneficiarios> Facturas_Beneficiarios { get; set; }
+        public virtual DbSet<Membresias> Membresias { get; set; }
+        public virtual DbSet<Negociaciones> Negociaciones { get; set; }
+        public virtual DbSet<Ordenes> Ordenes { get; set; }
+        public virtual DbSet<Pacientes> Pacientes { get; set; }
+        public virtual DbSet<Servicios> Servicios { get; set; }
+        public virtual DbSet<Titulares> Titulares { get; set; }
     }
 }

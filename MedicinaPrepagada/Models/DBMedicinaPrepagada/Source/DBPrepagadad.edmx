@@ -4,7 +4,54 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBPrepagadaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBPrepagadaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Beneficiarios">
+          <Key>
+            <PropertyRef Name="id_beneficiario" />
+          </Key>
+          <Property Name="id_beneficiario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_titular" Type="int" Nullable="false" />
+          <Property Name="id_paciente" Type="int" Nullable="false" />
+          <Property Name="id_membresia" Type="int" Nullable="false" />
+          <Property Name="habilitado" Type="bit" Nullable="false" />
+          <Property Name="fecha_registro" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Condiciones">
+          <Key>
+            <PropertyRef Name="id_condicion" />
+          </Key>
+          <Property Name="id_condicion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_servicio" Type="int" Nullable="false" />
+          <Property Name="edad_minima" Type="int" Nullable="false" />
+          <Property Name="edad_maxima" Type="int" Nullable="false" />
+          <Property Name="dias_afiliacion" Type="int" Nullable="false" />
+          <Property Name="cantidad_maxima_servicios" Type="int" Nullable="false" />
+          <Property Name="genero" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_titular" Type="int" Nullable="false" />
+          <Property Name="fecha_factura" Type="datetime" Nullable="false" />
+          <Property Name="fecha_factura_inicio" Type="datetime" Nullable="false" />
+          <Property Name="fecha_factura_fin" Type="datetime" Nullable="false" />
+          <Property Name="fecha_cancelado" Type="datetime" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="float" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="pagado" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facturas_Beneficiarios">
+          <Key>
+            <PropertyRef Name="id_factura_beneficiario" />
+          </Key>
+          <Property Name="id_factura_beneficiario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_beneficiario" Type="int" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="float" Nullable="false" />
+          <Property Name="id_factura" Type="int" Nullable="false" />
+          <Property Name="id_membresia" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="IPS">
           <Key>
             <PropertyRef Name="id_ips" />
@@ -18,11 +65,338 @@
           <Property Name="transferencia" Type="bit" Nullable="false" />
           <Property Name="numero_cuenta" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Membresias">
+          <Key>
+            <PropertyRef Name="id_membresia" />
+          </Key>
+          <Property Name="id_membresia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="porcentaje_copago" Type="float" Nullable="false" />
+          <Property Name="porcentaje_cuota_moderadora" Type="float" Nullable="false" />
+          <Property Name="valor_mensual" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Negociaciones">
+          <Key>
+            <PropertyRef Name="id_negociacion" />
+          </Key>
+          <Property Name="id_negociacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_servicio" Type="int" Nullable="false" />
+          <Property Name="id_ips" Type="int" Nullable="false" />
+          <Property Name="valor" Type="float" Nullable="false" />
+          <Property Name="habilitado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ordenes">
+          <Key>
+            <PropertyRef Name="id_orden" />
+          </Key>
+          <Property Name="id_orden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_paciente" Type="int" Nullable="false" />
+          <Property Name="id_servicio" Type="int" Nullable="false" />
+          <Property Name="id_ips" Type="int" Nullable="false" />
+          <Property Name="id_membresia" Type="int" Nullable="false" />
+          <Property Name="fecha_solicitud" Type="datetime" Nullable="false" />
+          <Property Name="valor_copago" Type="float" Nullable="false" />
+          <Property Name="valor_cuota_moderadora" Type="float" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pacientes">
+          <Key>
+            <PropertyRef Name="id_paciente" />
+          </Key>
+          <Property Name="id_paciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="documento" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Servicios">
+          <Key>
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="habilitado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Titulares">
+          <Key>
+            <PropertyRef Name="id_titular" />
+          </Key>
+          <Property Name="id_titular" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_paciente" Type="int" Nullable="false" />
+          <Property Name="id_membresia" Type="int" Nullable="false" />
+          <Property Name="habilitado" Type="bit" Nullable="false" />
+          <Property Name="fecha_registro" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Beneficiarios_Membresias">
+          <End Role="Membresias" Type="Self.Membresias" Multiplicity="1" />
+          <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membresias">
+              <PropertyRef Name="id_membresia" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="id_membresia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_Pacientes">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+          <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="id_paciente" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="id_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_Titulares">
+          <End Role="Titulares" Type="Self.Titulares" Multiplicity="1" />
+          <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Titulares">
+              <PropertyRef Name="id_titular" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="id_titular" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Condiciones_Servicios">
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
+          <End Role="Condiciones" Type="Self.Condiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="Condiciones">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Beneficiarios_Beneficiarios">
+          <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="1" />
+          <End Role="Facturas_Beneficiarios" Type="Self.Facturas_Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiarios">
+              <PropertyRef Name="id_beneficiario" />
+            </Principal>
+            <Dependent Role="Facturas_Beneficiarios">
+              <PropertyRef Name="id_beneficiario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Beneficiarios_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="Facturas_Beneficiarios" Type="Self.Facturas_Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="Facturas_Beneficiarios">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Beneficiarios_Membresias">
+          <End Role="Membresias" Type="Self.Membresias" Multiplicity="1" />
+          <End Role="Facturas_Beneficiarios" Type="Self.Facturas_Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membresias">
+              <PropertyRef Name="id_membresia" />
+            </Principal>
+            <Dependent Role="Facturas_Beneficiarios">
+              <PropertyRef Name="id_membresia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Titulares">
+          <End Role="Titulares" Type="Self.Titulares" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Titulares">
+              <PropertyRef Name="id_titular" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Negociaciones_IPS">
+          <End Role="IPS" Type="Self.IPS" Multiplicity="1" />
+          <End Role="Negociaciones" Type="Self.Negociaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IPS">
+              <PropertyRef Name="id_ips" />
+            </Principal>
+            <Dependent Role="Negociaciones">
+              <PropertyRef Name="id_ips" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Negociaciones_Servicios">
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
+          <End Role="Negociaciones" Type="Self.Negociaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="Negociaciones">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_IPS">
+          <End Role="IPS" Type="Self.IPS" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IPS">
+              <PropertyRef Name="id_ips" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="id_ips" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Membresias">
+          <End Role="Membresias" Type="Self.Membresias" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membresias">
+              <PropertyRef Name="id_membresia" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="id_membresia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Pacientes">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="id_paciente" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="id_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Servicios">
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulares_Membresias">
+          <End Role="Membresias" Type="Self.Membresias" Multiplicity="1" />
+          <End Role="Titulares" Type="Self.Titulares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membresias">
+              <PropertyRef Name="id_membresia" />
+            </Principal>
+            <Dependent Role="Titulares">
+              <PropertyRef Name="id_membresia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulares_Pacientes">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+          <End Role="Titulares" Type="Self.Titulares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="id_paciente" />
+            </Principal>
+            <Dependent Role="Titulares">
+              <PropertyRef Name="id_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DBPrepagadaModelStoreContainer">
+          <EntitySet Name="Beneficiarios" EntityType="Self.Beneficiarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Condiciones" EntityType="Self.Condiciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas_Beneficiarios" EntityType="Self.Facturas_Beneficiarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IPS" EntityType="Self.IPS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Membresias" EntityType="Self.Membresias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Negociaciones" EntityType="Self.Negociaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ordenes" EntityType="Self.Ordenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pacientes" EntityType="Self.Pacientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Titulares" EntityType="Self.Titulares" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Beneficiarios_Membresias" Association="Self.FK_Beneficiarios_Membresias">
+            <End Role="Membresias" EntitySet="Membresias" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_Pacientes" Association="Self.FK_Beneficiarios_Pacientes">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_Titulares" Association="Self.FK_Beneficiarios_Titulares">
+            <End Role="Titulares" EntitySet="Titulares" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Condiciones_Servicios" Association="Self.FK_Condiciones_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Condiciones" EntitySet="Condiciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Beneficiarios_Beneficiarios" Association="Self.FK_Facturas_Beneficiarios_Beneficiarios">
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+            <End Role="Facturas_Beneficiarios" EntitySet="Facturas_Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Beneficiarios_Facturas" Association="Self.FK_Facturas_Beneficiarios_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Facturas_Beneficiarios" EntitySet="Facturas_Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Beneficiarios_Membresias" Association="Self.FK_Facturas_Beneficiarios_Membresias">
+            <End Role="Membresias" EntitySet="Membresias" />
+            <End Role="Facturas_Beneficiarios" EntitySet="Facturas_Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Titulares" Association="Self.FK_Facturas_Titulares">
+            <End Role="Titulares" EntitySet="Titulares" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Negociaciones_IPS" Association="Self.FK_Negociaciones_IPS">
+            <End Role="IPS" EntitySet="IPS" />
+            <End Role="Negociaciones" EntitySet="Negociaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Negociaciones_Servicios" Association="Self.FK_Negociaciones_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Negociaciones" EntitySet="Negociaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_IPS" Association="Self.FK_Ordenes_IPS">
+            <End Role="IPS" EntitySet="IPS" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Membresias" Association="Self.FK_Ordenes_Membresias">
+            <End Role="Membresias" EntitySet="Membresias" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Pacientes" Association="Self.FK_Ordenes_Pacientes">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Servicios" Association="Self.FK_Ordenes_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulares_Membresias" Association="Self.FK_Titulares_Membresias">
+            <End Role="Membresias" EntitySet="Membresias" />
+            <End Role="Titulares" EntitySet="Titulares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulares_Pacientes" Association="Self.FK_Titulares_Pacientes">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Titulares" EntitySet="Titulares" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBPrepagadaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -38,10 +412,417 @@
           <Property Name="apellidos_contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="transferencia" Type="Boolean" Nullable="false" />
           <Property Name="numero_cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Negociaciones" Relationship="DBPrepagadaModel.FK_Negociaciones_IPS" FromRole="IPS" ToRole="Negociaciones" />
+          <NavigationProperty Name="Ordenes" Relationship="DBPrepagadaModel.FK_Ordenes_IPS" FromRole="IPS" ToRole="Ordenes" />
         </EntityType>
         <EntityContainer Name="DBPrepagadaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="IPS" EntityType="Self.IPS" />
+          <EntitySet Name="Beneficiarios" EntityType="DBPrepagadaModel.Beneficiarios" />
+          <EntitySet Name="Condiciones" EntityType="DBPrepagadaModel.Condiciones" />
+          <EntitySet Name="Facturas" EntityType="DBPrepagadaModel.Facturas" />
+          <EntitySet Name="Facturas_Beneficiarios" EntityType="DBPrepagadaModel.Facturas_Beneficiarios" />
+          <EntitySet Name="Membresias" EntityType="DBPrepagadaModel.Membresias" />
+          <EntitySet Name="Negociaciones" EntityType="DBPrepagadaModel.Negociaciones" />
+          <EntitySet Name="Ordenes" EntityType="DBPrepagadaModel.Ordenes" />
+          <EntitySet Name="Pacientes" EntityType="DBPrepagadaModel.Pacientes" />
+          <EntitySet Name="Servicios" EntityType="DBPrepagadaModel.Servicios" />
+          <EntitySet Name="Titulares" EntityType="DBPrepagadaModel.Titulares" />
+          <AssociationSet Name="FK_Beneficiarios_Membresias" Association="DBPrepagadaModel.FK_Beneficiarios_Membresias">
+            <End Role="Membresias" EntitySet="Membresias" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_Pacientes" Association="DBPrepagadaModel.FK_Beneficiarios_Pacientes">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_Titulares" Association="DBPrepagadaModel.FK_Beneficiarios_Titulares">
+            <End Role="Titulares" EntitySet="Titulares" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Beneficiarios_Beneficiarios" Association="DBPrepagadaModel.FK_Facturas_Beneficiarios_Beneficiarios">
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+            <End Role="Facturas_Beneficiarios" EntitySet="Facturas_Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Condiciones_Servicios" Association="DBPrepagadaModel.FK_Condiciones_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Condiciones" EntitySet="Condiciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Beneficiarios_Facturas" Association="DBPrepagadaModel.FK_Facturas_Beneficiarios_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Facturas_Beneficiarios" EntitySet="Facturas_Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Titulares" Association="DBPrepagadaModel.FK_Facturas_Titulares">
+            <End Role="Titulares" EntitySet="Titulares" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Beneficiarios_Membresias" Association="DBPrepagadaModel.FK_Facturas_Beneficiarios_Membresias">
+            <End Role="Membresias" EntitySet="Membresias" />
+            <End Role="Facturas_Beneficiarios" EntitySet="Facturas_Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Negociaciones_IPS" Association="DBPrepagadaModel.FK_Negociaciones_IPS">
+            <End Role="IPS" EntitySet="IPS" />
+            <End Role="Negociaciones" EntitySet="Negociaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_IPS" Association="DBPrepagadaModel.FK_Ordenes_IPS">
+            <End Role="IPS" EntitySet="IPS" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Membresias" Association="DBPrepagadaModel.FK_Ordenes_Membresias">
+            <End Role="Membresias" EntitySet="Membresias" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulares_Membresias" Association="DBPrepagadaModel.FK_Titulares_Membresias">
+            <End Role="Membresias" EntitySet="Membresias" />
+            <End Role="Titulares" EntitySet="Titulares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Negociaciones_Servicios" Association="DBPrepagadaModel.FK_Negociaciones_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Negociaciones" EntitySet="Negociaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Pacientes" Association="DBPrepagadaModel.FK_Ordenes_Pacientes">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Servicios" Association="DBPrepagadaModel.FK_Ordenes_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titulares_Pacientes" Association="DBPrepagadaModel.FK_Titulares_Pacientes">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Titulares" EntitySet="Titulares" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Beneficiarios">
+          <Key>
+            <PropertyRef Name="id_beneficiario" />
+          </Key>
+          <Property Name="id_beneficiario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_titular" Type="Int32" Nullable="false" />
+          <Property Name="id_paciente" Type="Int32" Nullable="false" />
+          <Property Name="id_membresia" Type="Int32" Nullable="false" />
+          <Property Name="habilitado" Type="Boolean" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Membresias" Relationship="DBPrepagadaModel.FK_Beneficiarios_Membresias" FromRole="Beneficiarios" ToRole="Membresias" />
+          <NavigationProperty Name="Pacientes" Relationship="DBPrepagadaModel.FK_Beneficiarios_Pacientes" FromRole="Beneficiarios" ToRole="Pacientes" />
+          <NavigationProperty Name="Titulares" Relationship="DBPrepagadaModel.FK_Beneficiarios_Titulares" FromRole="Beneficiarios" ToRole="Titulares" />
+          <NavigationProperty Name="Facturas_Beneficiarios" Relationship="DBPrepagadaModel.FK_Facturas_Beneficiarios_Beneficiarios" FromRole="Beneficiarios" ToRole="Facturas_Beneficiarios" />
+        </EntityType>
+        <EntityType Name="Condiciones">
+          <Key>
+            <PropertyRef Name="id_condicion" />
+          </Key>
+          <Property Name="id_condicion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_servicio" Type="Int32" Nullable="false" />
+          <Property Name="edad_minima" Type="Int32" Nullable="false" />
+          <Property Name="edad_maxima" Type="Int32" Nullable="false" />
+          <Property Name="dias_afiliacion" Type="Int32" Nullable="false" />
+          <Property Name="cantidad_maxima_servicios" Type="Int32" Nullable="false" />
+          <Property Name="genero" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Servicios" Relationship="DBPrepagadaModel.FK_Condiciones_Servicios" FromRole="Condiciones" ToRole="Servicios" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_titular" Type="Int32" Nullable="false" />
+          <Property Name="fecha_factura" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_factura_inicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_factura_fin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_cancelado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="valor_a_pagar" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pagado" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Facturas_Beneficiarios" Relationship="DBPrepagadaModel.FK_Facturas_Beneficiarios_Facturas" FromRole="Facturas" ToRole="Facturas_Beneficiarios" />
+          <NavigationProperty Name="Titulares" Relationship="DBPrepagadaModel.FK_Facturas_Titulares" FromRole="Facturas" ToRole="Titulares" />
+        </EntityType>
+        <EntityType Name="Facturas_Beneficiarios">
+          <Key>
+            <PropertyRef Name="id_factura_beneficiario" />
+          </Key>
+          <Property Name="id_factura_beneficiario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_beneficiario" Type="Int32" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="Double" Nullable="false" />
+          <Property Name="id_factura" Type="Int32" Nullable="false" />
+          <Property Name="id_membresia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Beneficiarios" Relationship="DBPrepagadaModel.FK_Facturas_Beneficiarios_Beneficiarios" FromRole="Facturas_Beneficiarios" ToRole="Beneficiarios" />
+          <NavigationProperty Name="Facturas" Relationship="DBPrepagadaModel.FK_Facturas_Beneficiarios_Facturas" FromRole="Facturas_Beneficiarios" ToRole="Facturas" />
+          <NavigationProperty Name="Membresias" Relationship="DBPrepagadaModel.FK_Facturas_Beneficiarios_Membresias" FromRole="Facturas_Beneficiarios" ToRole="Membresias" />
+        </EntityType>
+        <EntityType Name="Membresias">
+          <Key>
+            <PropertyRef Name="id_membresia" />
+          </Key>
+          <Property Name="id_membresia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="porcentaje_copago" Type="Double" Nullable="false" />
+          <Property Name="porcentaje_cuota_moderadora" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Beneficiarios" Relationship="DBPrepagadaModel.FK_Beneficiarios_Membresias" FromRole="Membresias" ToRole="Beneficiarios" />
+          <NavigationProperty Name="Facturas_Beneficiarios" Relationship="DBPrepagadaModel.FK_Facturas_Beneficiarios_Membresias" FromRole="Membresias" ToRole="Facturas_Beneficiarios" />
+          <NavigationProperty Name="Ordenes" Relationship="DBPrepagadaModel.FK_Ordenes_Membresias" FromRole="Membresias" ToRole="Ordenes" />
+          <NavigationProperty Name="Titulares" Relationship="DBPrepagadaModel.FK_Titulares_Membresias" FromRole="Membresias" ToRole="Titulares" />
+          <Property Name="valor_mensual" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Negociaciones">
+          <Key>
+            <PropertyRef Name="id_negociacion" />
+          </Key>
+          <Property Name="id_negociacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_servicio" Type="Int32" Nullable="false" />
+          <Property Name="id_ips" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Double" Nullable="false" />
+          <Property Name="habilitado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IPS" Relationship="DBPrepagadaModel.FK_Negociaciones_IPS" FromRole="Negociaciones" ToRole="IPS" />
+          <NavigationProperty Name="Servicios" Relationship="DBPrepagadaModel.FK_Negociaciones_Servicios" FromRole="Negociaciones" ToRole="Servicios" />
+        </EntityType>
+        <EntityType Name="Ordenes">
+          <Key>
+            <PropertyRef Name="id_orden" />
+          </Key>
+          <Property Name="id_orden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_paciente" Type="Int32" Nullable="false" />
+          <Property Name="id_servicio" Type="Int32" Nullable="false" />
+          <Property Name="id_ips" Type="Int32" Nullable="false" />
+          <Property Name="id_membresia" Type="Int32" Nullable="false" />
+          <Property Name="fecha_solicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="valor_copago" Type="Double" Nullable="false" />
+          <Property Name="valor_cuota_moderadora" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IPS" Relationship="DBPrepagadaModel.FK_Ordenes_IPS" FromRole="Ordenes" ToRole="IPS" />
+          <NavigationProperty Name="Membresias" Relationship="DBPrepagadaModel.FK_Ordenes_Membresias" FromRole="Ordenes" ToRole="Membresias" />
+          <NavigationProperty Name="Pacientes" Relationship="DBPrepagadaModel.FK_Ordenes_Pacientes" FromRole="Ordenes" ToRole="Pacientes" />
+          <NavigationProperty Name="Servicios" Relationship="DBPrepagadaModel.FK_Ordenes_Servicios" FromRole="Ordenes" ToRole="Servicios" />
+        </EntityType>
+        <EntityType Name="Pacientes">
+          <Key>
+            <PropertyRef Name="id_paciente" />
+          </Key>
+          <Property Name="id_paciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="documento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Beneficiarios" Relationship="DBPrepagadaModel.FK_Beneficiarios_Pacientes" FromRole="Pacientes" ToRole="Beneficiarios" />
+          <NavigationProperty Name="Ordenes" Relationship="DBPrepagadaModel.FK_Ordenes_Pacientes" FromRole="Pacientes" ToRole="Ordenes" />
+          <NavigationProperty Name="Titulares" Relationship="DBPrepagadaModel.FK_Titulares_Pacientes" FromRole="Pacientes" ToRole="Titulares" />
+        </EntityType>
+        <EntityType Name="Servicios">
+          <Key>
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="habilitado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Condiciones" Relationship="DBPrepagadaModel.FK_Condiciones_Servicios" FromRole="Servicios" ToRole="Condiciones" />
+          <NavigationProperty Name="Negociaciones" Relationship="DBPrepagadaModel.FK_Negociaciones_Servicios" FromRole="Servicios" ToRole="Negociaciones" />
+          <NavigationProperty Name="Ordenes" Relationship="DBPrepagadaModel.FK_Ordenes_Servicios" FromRole="Servicios" ToRole="Ordenes" />
+        </EntityType>
+        <EntityType Name="Titulares">
+          <Key>
+            <PropertyRef Name="id_titular" />
+          </Key>
+          <Property Name="id_titular" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_paciente" Type="Int32" Nullable="false" />
+          <Property Name="id_membresia" Type="Int32" Nullable="false" />
+          <Property Name="habilitado" Type="Boolean" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Beneficiarios" Relationship="DBPrepagadaModel.FK_Beneficiarios_Titulares" FromRole="Titulares" ToRole="Beneficiarios" />
+          <NavigationProperty Name="Facturas" Relationship="DBPrepagadaModel.FK_Facturas_Titulares" FromRole="Titulares" ToRole="Facturas" />
+          <NavigationProperty Name="Membresias" Relationship="DBPrepagadaModel.FK_Titulares_Membresias" FromRole="Titulares" ToRole="Membresias" />
+          <NavigationProperty Name="Pacientes" Relationship="DBPrepagadaModel.FK_Titulares_Pacientes" FromRole="Titulares" ToRole="Pacientes" />
+        </EntityType>
+        <Association Name="FK_Beneficiarios_Membresias">
+          <End Type="DBPrepagadaModel.Membresias" Role="Membresias" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Beneficiarios" Role="Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membresias">
+              <PropertyRef Name="id_membresia" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="id_membresia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_Pacientes">
+          <End Type="DBPrepagadaModel.Pacientes" Role="Pacientes" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Beneficiarios" Role="Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="id_paciente" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="id_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_Titulares">
+          <End Type="DBPrepagadaModel.Titulares" Role="Titulares" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Beneficiarios" Role="Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Titulares">
+              <PropertyRef Name="id_titular" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="id_titular" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Beneficiarios_Beneficiarios">
+          <End Type="DBPrepagadaModel.Beneficiarios" Role="Beneficiarios" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Facturas_Beneficiarios" Role="Facturas_Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiarios">
+              <PropertyRef Name="id_beneficiario" />
+            </Principal>
+            <Dependent Role="Facturas_Beneficiarios">
+              <PropertyRef Name="id_beneficiario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Condiciones_Servicios">
+          <End Type="DBPrepagadaModel.Servicios" Role="Servicios" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Condiciones" Role="Condiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="Condiciones">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Beneficiarios_Facturas">
+          <End Type="DBPrepagadaModel.Facturas" Role="Facturas" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Facturas_Beneficiarios" Role="Facturas_Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="Facturas_Beneficiarios">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Titulares">
+          <End Type="DBPrepagadaModel.Titulares" Role="Titulares" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Facturas" Role="Facturas" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Titulares">
+              <PropertyRef Name="id_titular" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Beneficiarios_Membresias">
+          <End Type="DBPrepagadaModel.Membresias" Role="Membresias" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Facturas_Beneficiarios" Role="Facturas_Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membresias">
+              <PropertyRef Name="id_membresia" />
+            </Principal>
+            <Dependent Role="Facturas_Beneficiarios">
+              <PropertyRef Name="id_membresia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Negociaciones_IPS">
+          <End Type="DBPrepagadaModel.IPS" Role="IPS" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Negociaciones" Role="Negociaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IPS">
+              <PropertyRef Name="id_ips" />
+            </Principal>
+            <Dependent Role="Negociaciones">
+              <PropertyRef Name="id_ips" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_IPS">
+          <End Type="DBPrepagadaModel.IPS" Role="IPS" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Ordenes" Role="Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IPS">
+              <PropertyRef Name="id_ips" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="id_ips" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Membresias">
+          <End Type="DBPrepagadaModel.Membresias" Role="Membresias" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Ordenes" Role="Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membresias">
+              <PropertyRef Name="id_membresia" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="id_membresia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulares_Membresias">
+          <End Type="DBPrepagadaModel.Membresias" Role="Membresias" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Titulares" Role="Titulares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membresias">
+              <PropertyRef Name="id_membresia" />
+            </Principal>
+            <Dependent Role="Titulares">
+              <PropertyRef Name="id_membresia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Negociaciones_Servicios">
+          <End Type="DBPrepagadaModel.Servicios" Role="Servicios" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Negociaciones" Role="Negociaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="Negociaciones">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Pacientes">
+          <End Type="DBPrepagadaModel.Pacientes" Role="Pacientes" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Ordenes" Role="Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="id_paciente" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="id_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Servicios">
+          <End Type="DBPrepagadaModel.Servicios" Role="Servicios" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Ordenes" Role="Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titulares_Pacientes">
+          <End Type="DBPrepagadaModel.Pacientes" Role="Pacientes" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Titulares" Role="Titulares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="id_paciente" />
+            </Principal>
+            <Dependent Role="Titulares">
+              <PropertyRef Name="id_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -59,6 +840,125 @@
                 <ScalarProperty Name="apellidos_contacto" ColumnName="apellidos_contacto" />
                 <ScalarProperty Name="transferencia" ColumnName="transferencia" />
                 <ScalarProperty Name="numero_cuenta" ColumnName="numero_cuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Beneficiarios">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Beneficiarios">
+              <MappingFragment StoreEntitySet="Beneficiarios">
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+                <ScalarProperty Name="id_membresia" ColumnName="id_membresia" />
+                <ScalarProperty Name="id_paciente" ColumnName="id_paciente" />
+                <ScalarProperty Name="id_titular" ColumnName="id_titular" />
+                <ScalarProperty Name="id_beneficiario" ColumnName="id_beneficiario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Condiciones">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Condiciones">
+              <MappingFragment StoreEntitySet="Condiciones">
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="cantidad_maxima_servicios" ColumnName="cantidad_maxima_servicios" />
+                <ScalarProperty Name="dias_afiliacion" ColumnName="dias_afiliacion" />
+                <ScalarProperty Name="edad_maxima" ColumnName="edad_maxima" />
+                <ScalarProperty Name="edad_minima" ColumnName="edad_minima" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="id_condicion" ColumnName="id_condicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Facturas">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="pagado" ColumnName="pagado" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="valor_a_pagar" ColumnName="valor_a_pagar" />
+                <ScalarProperty Name="fecha_cancelado" ColumnName="fecha_cancelado" />
+                <ScalarProperty Name="fecha_factura_fin" ColumnName="fecha_factura_fin" />
+                <ScalarProperty Name="fecha_factura_inicio" ColumnName="fecha_factura_inicio" />
+                <ScalarProperty Name="fecha_factura" ColumnName="fecha_factura" />
+                <ScalarProperty Name="id_titular" ColumnName="id_titular" />
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas_Beneficiarios">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Facturas_Beneficiarios">
+              <MappingFragment StoreEntitySet="Facturas_Beneficiarios">
+                <ScalarProperty Name="id_membresia" ColumnName="id_membresia" />
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="valor_a_pagar" ColumnName="valor_a_pagar" />
+                <ScalarProperty Name="id_beneficiario" ColumnName="id_beneficiario" />
+                <ScalarProperty Name="id_factura_beneficiario" ColumnName="id_factura_beneficiario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Membresias">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Membresias">
+              <MappingFragment StoreEntitySet="Membresias">
+                <ScalarProperty Name="valor_mensual" ColumnName="valor_mensual" />
+                <ScalarProperty Name="porcentaje_cuota_moderadora" ColumnName="porcentaje_cuota_moderadora" />
+                <ScalarProperty Name="porcentaje_copago" ColumnName="porcentaje_copago" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_membresia" ColumnName="id_membresia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Negociaciones">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Negociaciones">
+              <MappingFragment StoreEntitySet="Negociaciones">
+                <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="id_ips" ColumnName="id_ips" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="id_negociacion" ColumnName="id_negociacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordenes">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Ordenes">
+              <MappingFragment StoreEntitySet="Ordenes">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="valor_cuota_moderadora" ColumnName="valor_cuota_moderadora" />
+                <ScalarProperty Name="valor_copago" ColumnName="valor_copago" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="id_membresia" ColumnName="id_membresia" />
+                <ScalarProperty Name="id_ips" ColumnName="id_ips" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="id_paciente" ColumnName="id_paciente" />
+                <ScalarProperty Name="id_orden" ColumnName="id_orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacientes">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Pacientes">
+              <MappingFragment StoreEntitySet="Pacientes">
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_paciente" ColumnName="id_paciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicios">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Servicios">
+              <MappingFragment StoreEntitySet="Servicios">
+                <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titulares">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Titulares">
+              <MappingFragment StoreEntitySet="Titulares">
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+                <ScalarProperty Name="id_membresia" ColumnName="id_membresia" />
+                <ScalarProperty Name="id_paciente" ColumnName="id_paciente" />
+                <ScalarProperty Name="id_titular" ColumnName="id_titular" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -201,10 +201,18 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IPSController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdenesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DBMedicinaPrepagada\Extended\IPS.cs" />
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Beneficiarios.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Condiciones.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DBMedicinaPrepagada\Source\DBPrepagadad.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -220,7 +228,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBPrepagadad.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Facturas.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Facturas_Beneficiarios.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DBMedicinaPrepagada\Source\IPS.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Membresias.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Negociaciones.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Ordenes.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Pacientes.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Servicios.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Titulares.cs">
       <DependentUpon>DBPrepagadad.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -313,10 +345,13 @@
     <Content Include="Views\IPS\Details.cshtml" />
     <Content Include="Views\IPS\Edit.cshtml" />
     <Content Include="Views\IPS\Index.cshtml" />
+    <Content Include="Views\Ordenes\Create.cshtml" />
+    <Content Include="Views\Ordenes\Edit.cshtml" />
+    <Content Include="Views\Ordenes\Index.cshtml" />
+    <Content Include="Views\Ordenes\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DBMedicinaPrepagada\Extended\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
