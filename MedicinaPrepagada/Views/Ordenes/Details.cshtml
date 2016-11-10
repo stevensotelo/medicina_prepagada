@@ -1,0 +1,79 @@
+﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Ordenes
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ordenes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Fecha de solicitud
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_solicitud)
+        </dd>
+
+        <dt>
+            Valor Copago
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.valor_copago)
+        </dd>
+
+        <dt>
+            Valor cuota moderadora
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.valor_cuota_moderadora)
+        </dd>
+
+        <dt>
+            Estado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            IPS
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IPS.nombre)
+        </dd>
+
+        <dt>
+            Membresia
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Membresias.descripcion)
+        </dd>
+
+        <dt>
+            Paciente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pacientes.nombre) @Html.DisplayFor(model => model.Pacientes.apellidos)
+        </dd>
+
+        <dt>
+            Servicio
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servicios.descripcion)
+        </dd>
+
+    </dl>
+</div>

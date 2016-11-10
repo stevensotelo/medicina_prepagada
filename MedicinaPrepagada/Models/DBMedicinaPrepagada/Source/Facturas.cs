@@ -12,27 +12,26 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
     using System;
     using System.Collections.Generic;
     
-    public partial class IPS
+    public partial class Facturas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public IPS()
+        public Facturas()
         {
-            this.Negociaciones = new HashSet<Negociaciones>();
-            this.Ordenes = new HashSet<Ordenes>();
+            this.Facturas_Beneficiarios = new HashSet<Facturas_Beneficiarios>();
         }
     
-        public int id_ips { get; set; }
-        public string nombre { get; set; }
-        public string nit { get; set; }
-        public string telefono { get; set; }
-        public string nombre_contacto { get; set; }
-        public string apellidos_contacto { get; set; }
-        public bool transferencia { get; set; }
-        public string numero_cuenta { get; set; }
+        public int id_factura { get; set; }
+        public int id_titular { get; set; }
+        public System.DateTime fecha_factura { get; set; }
+        public System.DateTime fecha_factura_inicio { get; set; }
+        public System.DateTime fecha_factura_fin { get; set; }
+        public System.DateTime fecha_cancelado { get; set; }
+        public double valor_a_pagar { get; set; }
+        public string estado { get; set; }
+        public double pagado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Negociaciones> Negociaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ordenes> Ordenes { get; set; }
+        public virtual ICollection<Facturas_Beneficiarios> Facturas_Beneficiarios { get; set; }
+        public virtual Titulares Titulares { get; set; }
     }
 }

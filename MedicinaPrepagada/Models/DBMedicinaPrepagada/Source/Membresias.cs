@@ -12,27 +12,30 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
     using System;
     using System.Collections.Generic;
     
-    public partial class IPS
+    public partial class Membresias
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public IPS()
+        public Membresias()
         {
-            this.Negociaciones = new HashSet<Negociaciones>();
+            this.Beneficiarios = new HashSet<Beneficiarios>();
+            this.Facturas_Beneficiarios = new HashSet<Facturas_Beneficiarios>();
             this.Ordenes = new HashSet<Ordenes>();
+            this.Titulares = new HashSet<Titulares>();
         }
     
-        public int id_ips { get; set; }
-        public string nombre { get; set; }
-        public string nit { get; set; }
-        public string telefono { get; set; }
-        public string nombre_contacto { get; set; }
-        public string apellidos_contacto { get; set; }
-        public bool transferencia { get; set; }
-        public string numero_cuenta { get; set; }
+        public int id_membresia { get; set; }
+        public string descripcion { get; set; }
+        public double porcentaje_copago { get; set; }
+        public double porcentaje_cuota_moderadora { get; set; }
+        public double valor_mensual { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Negociaciones> Negociaciones { get; set; }
+        public virtual ICollection<Beneficiarios> Beneficiarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Facturas_Beneficiarios> Facturas_Beneficiarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordenes> Ordenes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Titulares> Titulares { get; set; }
     }
 }

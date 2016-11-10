@@ -12,24 +12,22 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
     using System;
     using System.Collections.Generic;
     
-    public partial class IPS
+    public partial class Servicios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public IPS()
+        public Servicios()
         {
+            this.Condiciones = new HashSet<Condiciones>();
             this.Negociaciones = new HashSet<Negociaciones>();
             this.Ordenes = new HashSet<Ordenes>();
         }
     
-        public int id_ips { get; set; }
-        public string nombre { get; set; }
-        public string nit { get; set; }
-        public string telefono { get; set; }
-        public string nombre_contacto { get; set; }
-        public string apellidos_contacto { get; set; }
-        public bool transferencia { get; set; }
-        public string numero_cuenta { get; set; }
+        public int id_servicio { get; set; }
+        public string descripcion { get; set; }
+        public bool habilitado { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Condiciones> Condiciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Negociaciones> Negociaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
