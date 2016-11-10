@@ -89,8 +89,9 @@ namespace MedicinaPrepagada.Controllers
         public ActionResult Edit([Bind(Include = "id_orden,id_paciente,id_servicio,id_ips,id_membresia,fecha_solicitud,valor_copago,valor_cuota_moderadora,estado")] Ordenes ordenes)
         {
             if (ModelState.IsValid)
-            {
+            {   
                 var negociacion = db.Negociaciones.SingleOrDefault(p => p.id_ips == ordenes.id_ips && p.id_servicio == p.id_servicio);
+
                 db.Entry(ordenes).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
