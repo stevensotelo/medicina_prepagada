@@ -347,8 +347,10 @@
     <Content Include="Views\IPS\Edit.cshtml" />
     <Content Include="Views\IPS\Index.cshtml" />
     <Content Include="Views\Ordenes\Create.cshtml" />
-    <Content Include="Views\Ordenes\Edit.cshtml" />
+    <Content Include="Views\Ordenes\Delete.cshtml" />
     <Content Include="Views\Ordenes\Details.cshtml" />
+    <Content Include="Views\Ordenes\Edit.cshtml" />
+    <Content Include="Views\Ordenes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
