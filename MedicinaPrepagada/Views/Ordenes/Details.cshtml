@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
     <h4>Ordenes</h4>
@@ -76,8 +76,8 @@
         </dd>
 
     </dl>
+
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Imprimir" class="btn btn-default" />
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_orden }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

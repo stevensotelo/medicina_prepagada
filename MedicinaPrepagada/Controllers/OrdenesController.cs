@@ -85,17 +85,31 @@ namespace MedicinaPrepagada.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id)
         {
-            var ordenes = db.Ordenes.Find(id);
+            try
+            {
+                var ordenes = db.Ordenes.Find(id);
+                var servicios = db.Ordenes.Where(p => p.id_paciente == ordenes.id_paciente && p.estado == "aprobada");
+                var condicion = db.Condiciones.FirstOrDefault(p => p.id_servicio == p.id_servicio);
+                if (ordenes.GetReglasValidacion(condicion, servicios.Count()).Count() > 0)
+                {
+                    ordenes.estado = "rechazada";
+                }
+                else
+                {
+                    var negociacion = db.Negociaciones.LastOrDefault(p => p.id_ips == ordenes.id_ips && p.id_servicio == ordenes.id_servicio && p.habilitado);
+                    ordenes.estado = "aprobada";
+                    ordenes.valor_copago = negociacion.valor * ordenes.Membresias.porcentaje_copago;
+                    ordenes.valor_copago = negociacion.valor * ordenes.Membresias.porcentaje_cuota_moderadora;
 
-            db.Entry(ordenes).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-
-            ViewBag.id_ips = new SelectList(db.IPS, "id_ips", "nombre", ordenes.id_ips);
-            ViewBag.id_membresia = new SelectList(db.Membresias, "id_membresia", "descripcion", ordenes.id_membresia);
-            ViewBag.id_paciente = new SelectList(db.Pacientes, "id_paciente", "nombre", ordenes.id_paciente);
-            ViewBag.id_servicio = new SelectList(db.Servicios, "id_servicio", "descripcion", ordenes.id_servicio);
-            return View(ordenes);
+                }
+                db.Entry(ordenes).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = id });
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Edit", new { id = id });
+            }
         }
 
 

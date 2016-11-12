@@ -207,6 +207,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DBMedicinaPrepagada\Extended\IPS.cs" />
+    <Compile Include="Models\DBMedicinaPrepagada\Extended\Ordenes.cs" />
     <Compile Include="Models\DBMedicinaPrepagada\Source\Beneficiarios.cs">
       <DependentUpon>DBPrepagadad.tt</DependentUpon>
     </Compile>
