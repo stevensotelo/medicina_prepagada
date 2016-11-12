@@ -207,7 +207,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DBMedicinaPrepagada\Extended\IPS.cs" />
-    <Compile Include="Models\DBMedicinaPrepagada\Extended\Ordenes.cs" />
     <Compile Include="Models\DBMedicinaPrepagada\Source\Beneficiarios.cs">
       <DependentUpon>DBPrepagadad.tt</DependentUpon>
     </Compile>
@@ -347,7 +346,6 @@
     <Content Include="Views\IPS\Edit.cshtml" />
     <Content Include="Views\IPS\Index.cshtml" />
     <Content Include="Views\Ordenes\Create.cshtml" />
-    <Content Include="Views\Ordenes\Delete.cshtml" />
     <Content Include="Views\Ordenes\Details.cshtml" />
     <Content Include="Views\Ordenes\Edit.cshtml" />
     <Content Include="Views\Ordenes\Index.cshtml" />
