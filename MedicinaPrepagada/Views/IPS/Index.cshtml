@@ -5,33 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Listar</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nombre)
+            Nombre
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.nit)
+            Nit
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.telefono)
+            Teléfono
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.nombre_contacto)
+            Nombre de contacto
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.apellidos_contacto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.transferencia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.numero_cuenta)
+            Apellidos de contacto
         </th>
         <th></th>
     </tr>
@@ -54,15 +48,9 @@
             @Html.DisplayFor(modelItem => item.apellidos_contacto)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.transferencia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.numero_cuenta)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_ips }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_ips }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_ips })
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_ips }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.id_ips }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.id_ips })
         </td>
     </tr>
 }

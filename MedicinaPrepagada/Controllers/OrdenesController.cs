@@ -13,25 +13,27 @@ namespace MedicinaPrepagada.Controllers
     public class OrdenesController : Controller
     {
         private DBPrepagadaEntities db = new DBPrepagadaEntities();
-                
+
+        // GET: Ordenes
+        public ActionResult Index()
+        {
+            var ordenes = db.Ordenes.Include(o => o.IPS).Include(o => o.Membresias).Include(o => o.Pacientes).Include(o => o.Servicios);
+            return View(ordenes.ToList());
+        }
 
         // GET: Ordenes/Details/5
         public ActionResult Details(int? id)
         {
-            try
+            if (id == null)
             {
-                ViewBag.id = id == null ? "" : id.Value.ToString();
-                Ordenes ordenes = null;
-                if (id == null || (ordenes = db.Ordenes.Find(id)) == null)
-                {
-                    return View(ordenes);
-                }
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception ex)
+            Ordenes ordenes = db.Ordenes.Find(id);
+            if (ordenes == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
-            }            
+                return HttpNotFound();
+            }
+            return View(ordenes);
         }
 
         // GET: Ordenes/Create
@@ -40,7 +42,7 @@ namespace MedicinaPrepagada.Controllers
             ViewBag.id_ips = new SelectList(db.IPS, "id_ips", "nombre");
             ViewBag.id_membresia = new SelectList(db.Membresias, "id_membresia", "descripcion");
             ViewBag.id_paciente = new SelectList(db.Pacientes, "id_paciente", "nombre");
-            ViewBag.id_servicio = new SelectList(db.Servicios.Where(p=>p.habilitado), "id_servicio", "descripcion");
+            ViewBag.id_servicio = new SelectList(db.Servicios.Where(p => p.habilitado), "id_servicio", "descripcion");
             return View();
         }
 
@@ -49,61 +51,68 @@ namespace MedicinaPrepagada.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_orden,id_paciente,id_servicio,id_ips,id_membresia,fecha_solicitud,valor_copago,valor_cuota_moderadora,estado")] Ordenes ordenes)
+        public ActionResult Create([Bind(Include = "id_orden,id_paciente,id_servicio,id_ips,id_membresia")] Ordenes ordenes)
         {
-            if (ModelState.IsValid)
-            {
-                ordenes.estado = "pendiente";
-                ordenes.fecha_solicitud = DateTime.Now;
-                ordenes.valor_copago = 0;
-                ordenes.valor_cuota_moderadora = 0;
-                db.Ordenes.Add(ordenes);
-                db.SaveChanges();
-                return RedirectToAction("Edit", new { id = ordenes.id_orden });
-            }
 
-            ViewBag.id_ips = new SelectList(db.IPS, "id_ips", "nombre", ordenes.id_ips);
-            ViewBag.id_membresia = new SelectList(db.Membresias, "id_membresia", "descripcion", ordenes.id_membresia);
-            ViewBag.id_paciente = new SelectList(db.Pacientes, "id_paciente", "nombre", ordenes.id_paciente);
-            ViewBag.id_servicio = new SelectList(db.Servicios.Where(p => p.habilitado), "id_servicio", "descripcion", ordenes.id_servicio);
-            return View(ordenes);
+            ordenes.estado = "pendiente";
+            ordenes.fecha_solicitud = DateTime.Now;
+            ordenes.valor_copago = 0;
+            ordenes.valor_cuota_moderadora = 0;
+            db.Ordenes.Add(ordenes);
+            db.SaveChanges();
+            return RedirectToAction("Edit", new { id = ordenes.id_orden });
         }
 
         // GET: Ordenes/Edit/5
         public ActionResult Edit(int? id)
         {
-            ViewBag.id = id == null ? "" : id.Value.ToString();
-            Ordenes ordenes = null;
-            if (id == null || (ordenes = db.Ordenes.Find(id)) == null)
+            if (id == null)
             {
-                return View(ordenes);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View();
+            Ordenes ordenes = db.Ordenes.Find(id);
+            if (ordenes == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ordenes);
         }
 
         // POST: Ordenes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_orden,id_paciente,id_servicio,id_ips,id_membresia,fecha_solicitud,valor_copago,valor_cuota_moderadora,estado")] Ordenes ordenes)
+        public ActionResult Edit(int id)
         {
-            if (ModelState.IsValid)
-            {   
-                var negociacion = db.Negociaciones.SingleOrDefault(p => p.id_ips == ordenes.id_ips && p.id_servicio == p.id_servicio);
+            try
+            {
+                var ordenes = db.Ordenes.Find(id);
+                var servicios = db.Ordenes.Where(p => p.id_paciente == ordenes.id_paciente && p.estado == "aprobada");
+                var condicion = db.Condiciones.FirstOrDefault(p => p.id_servicio == p.id_servicio);
+                if (ordenes.GetReglasValidacion(condicion, servicios.Count()).Count() > 0)
+                {
+                    ordenes.estado = "rechazada";
+                }
+                else
+                {
+                    var negociacion = db.Negociaciones.LastOrDefault(p => p.id_ips == ordenes.id_ips && p.id_servicio == ordenes.id_servicio && p.habilitado);
+                    ordenes.estado = "aprobada";
+                    ordenes.valor_copago = negociacion.valor * ordenes.Membresias.porcentaje_copago;
+                    ordenes.valor_copago = negociacion.valor * ordenes.Membresias.porcentaje_cuota_moderadora;
 
+                }
                 db.Entry(ordenes).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = id });
             }
-            ViewBag.id_ips = new SelectList(db.IPS, "id_ips", "nombre", ordenes.id_ips);
-            ViewBag.id_membresia = new SelectList(db.Membresias, "id_membresia", "descripcion", ordenes.id_membresia);
-            ViewBag.id_paciente = new SelectList(db.Pacientes, "id_paciente", "nombre", ordenes.id_paciente);
-            ViewBag.id_servicio = new SelectList(db.Servicios, "id_servicio", "descripcion", ordenes.id_servicio);
-            return View(ordenes);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Edit", new { id = id });
+            }
         }
 
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

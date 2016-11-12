@@ -64,8 +64,10 @@ namespace MedicinaPrepagada.Controllers
         {
             try
             {
-                if (ModelState.IsValid && iPS.isValid)
+                if (ModelState.IsValid)
                 {
+                    if (!iPS.isValidated)
+                        throw new Exception();
                     db.IPS.Add(iPS);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -111,8 +113,10 @@ namespace MedicinaPrepagada.Controllers
         {
             try
             {
-                if (ModelState.IsValid && iPS.isValid)
+                if (ModelState.IsValid)
                 {
+                    if (!iPS.isValidated)
+                        throw new Exception();
                     db.Entry(iPS).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");

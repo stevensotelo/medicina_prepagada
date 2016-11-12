@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
     <h4>Ordenes</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Fecha de solicitud
+            @Html.DisplayNameFor(model => model.fecha_solicitud)
         </dt>
 
         <dd>
@@ -20,23 +20,23 @@
         </dd>
 
         <dt>
-            Valor Copago
+            @Html.DisplayNameFor(model => model.valor_copago)
         </dt>
 
         <dd>
-            $ @Html.DisplayFor(model => model.valor_copago)
+            @Html.DisplayFor(model => model.valor_copago)
         </dd>
 
         <dt>
-            Valor cuota moderadora
+            @Html.DisplayNameFor(model => model.valor_cuota_moderadora)
         </dt>
 
         <dd>
-            $ @Html.DisplayFor(model => model.valor_cuota_moderadora)
+            @Html.DisplayFor(model => model.valor_cuota_moderadora)
         </dd>
 
         <dt>
-            Estado
+            @Html.DisplayNameFor(model => model.estado)
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            IPS
+            @Html.DisplayNameFor(model => model.IPS.nombre)
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            Membresia
+            @Html.DisplayNameFor(model => model.Membresias.descripcion)
         </dt>
 
         <dd>
@@ -60,15 +60,15 @@
         </dd>
 
         <dt>
-            Paciente
+            @Html.DisplayNameFor(model => model.Pacientes.nombre)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Pacientes.nombre) @Html.DisplayFor(model => model.Pacientes.apellidos)
+            @Html.DisplayFor(model => model.Pacientes.nombre)
         </dd>
 
         <dt>
-            Servicio
+            @Html.DisplayNameFor(model => model.Servicios.descripcion)
         </dt>
 
         <dd>
@@ -76,4 +76,8 @@
         </dd>
 
     </dl>
+
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Imprimir" class="btn btn-default" />
+    </div>
 </div>

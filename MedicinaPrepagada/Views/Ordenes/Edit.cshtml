@@ -1,108 +1,79 @@
 ﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Ordenes
 
 @{
-    ViewBag.Title = "Procesar solicitud";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Procesar solicitud</h2>
+<h2>Validar</h2>
 
-<form action="/Ordenes/Edit" method="get">
-    <div class="form-group">
-        Código de orden
-        <div class="col-md-10">
-            <input type="email" class="form-control" id="id" placeholder="Email" value="@ViewBag.id">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Buscar" class="btn btn-default" />
-        </div>
-    </div>
-</form>
+<div>
+    <h4>Ordenes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_solicitud)
+        </dt>
 
-@if (Model != null)
-{
+        <dd>
+            @Html.DisplayFor(model => model.fecha_solicitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IPS.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IPS.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Membresias.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Membresias.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pacientes.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pacientes.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Servicios.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servicios.descripcion)
+        </dd>
+
+    </dl>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <dl class="dl-horizontal">
-                <dt>
-                    Fecha de solicitud
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.fecha_solicitud)
-                </dd>
-
-                <dt>
-                    Valor Copago
-                </dt>
-
-                <dd>
-                    $ @Html.DisplayFor(model => model.valor_copago)
-                </dd>
-
-                <dt>
-                    Valor cuota moderadora
-                </dt>
-
-                <dd>
-                    $ @Html.DisplayFor(model => model.valor_cuota_moderadora)
-                </dd>
-
-                <dt>
-                    Estado
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.estado)
-                </dd>
-
-                <dt>
-                    IPS
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.IPS.nombre)
-                </dd>
-
-                <dt>
-                    Membresia
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Membresias.descripcion)
-                </dd>
-
-                <dt>
-                    Paciente
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Pacientes.nombre) @Html.DisplayFor(model => model.Pacientes.apellidos)
-                </dd>
-
-                <dt>
-                    Servicio
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Servicios.descripcion)
-                </dd>
-
-            </dl>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Validar" class="btn btn-default" />
-                </div>
+        <div class="form-actions no-color">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Validar" class="btn btn-default" />
             </div>
         </div>
+
     }
 
-}
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

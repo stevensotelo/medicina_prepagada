@@ -8,7 +8,7 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
 {
     public partial class IPS
     {
-        public bool isValid { get { return GetReglasValidacion().Count() == 0; } }
+        public bool isValidated { get { return GetReglasValidacion().Count() == 0; } }
 
          /// <summary>
          /// Metodo que se encarga de las validaciones propias del negocio
