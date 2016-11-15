@@ -213,13 +213,13 @@
         </Association>
         <Association Name="FK_Facturas_Titulares">
           <End Role="Titulares" Type="Self.Titulares" Multiplicity="1" />
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Titulares">
               <PropertyRef Name="id_titular" />
             </Principal>
             <Dependent Role="Facturas">
-              <PropertyRef Name="id_factura" />
+              <PropertyRef Name="id_titular" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -451,10 +451,6 @@
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="Facturas_Beneficiarios" EntitySet="Facturas_Beneficiarios" />
           </AssociationSet>
-          <AssociationSet Name="FK_Facturas_Titulares" Association="DBPrepagadaModel.FK_Facturas_Titulares">
-            <End Role="Titulares" EntitySet="Titulares" />
-            <End Role="Facturas" EntitySet="Facturas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Facturas_Beneficiarios_Membresias" Association="DBPrepagadaModel.FK_Facturas_Beneficiarios_Membresias">
             <End Role="Membresias" EntitySet="Membresias" />
             <End Role="Facturas_Beneficiarios" EntitySet="Facturas_Beneficiarios" />
@@ -490,6 +486,10 @@
           <AssociationSet Name="FK_Titulares_Pacientes" Association="DBPrepagadaModel.FK_Titulares_Pacientes">
             <End Role="Pacientes" EntitySet="Pacientes" />
             <End Role="Titulares" EntitySet="Titulares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Titulares" Association="DBPrepagadaModel.FK_Facturas_Titulares">
+            <End Role="Titulares" EntitySet="Titulares" />
+            <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Beneficiarios">
@@ -627,9 +627,9 @@
           <Property Name="habilitado" Type="Boolean" Nullable="false" />
           <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Beneficiarios" Relationship="DBPrepagadaModel.FK_Beneficiarios_Titulares" FromRole="Titulares" ToRole="Beneficiarios" />
-          <NavigationProperty Name="Facturas" Relationship="DBPrepagadaModel.FK_Facturas_Titulares" FromRole="Titulares" ToRole="Facturas" />
           <NavigationProperty Name="Membresias" Relationship="DBPrepagadaModel.FK_Titulares_Membresias" FromRole="Titulares" ToRole="Membresias" />
           <NavigationProperty Name="Pacientes" Relationship="DBPrepagadaModel.FK_Titulares_Pacientes" FromRole="Titulares" ToRole="Pacientes" />
+          <NavigationProperty Name="Facturas" Relationship="DBPrepagadaModel.FK_Facturas_Titulares" FromRole="Titulares" ToRole="Facturas" />
         </EntityType>
         <Association Name="FK_Beneficiarios_Membresias">
           <End Type="DBPrepagadaModel.Membresias" Role="Membresias" Multiplicity="1" />
@@ -699,18 +699,6 @@
               <PropertyRef Name="id_factura" />
             </Principal>
             <Dependent Role="Facturas_Beneficiarios">
-              <PropertyRef Name="id_factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Facturas_Titulares">
-          <End Type="DBPrepagadaModel.Titulares" Role="Titulares" Multiplicity="1" />
-          <End Type="DBPrepagadaModel.Facturas" Role="Facturas" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Titulares">
-              <PropertyRef Name="id_titular" />
-            </Principal>
-            <Dependent Role="Facturas">
               <PropertyRef Name="id_factura" />
             </Dependent>
           </ReferentialConstraint>
@@ -820,6 +808,18 @@
             </Principal>
             <Dependent Role="Titulares">
               <PropertyRef Name="id_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Titulares">
+          <End Type="DBPrepagadaModel.Titulares" Role="Titulares" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.Facturas" Role="Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Titulares">
+              <PropertyRef Name="id_titular" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="id_titular" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

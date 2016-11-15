@@ -1,0 +1,43 @@
+﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Facturas
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Facturar</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Facturas</h4>
+        <hr />
+
+        <div class="form-group">            
+            <label for="ano" class="control-label col-md-2">Año</label>
+            <div class="col-md-10">
+                <input class="form-control" id="ano" name="ano" placeholder="2016" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="mes" class="control-label col-md-2">Mes</label>
+            <div class="col-md-10">
+                <input class="form-control" id="mes" name="mes" placeholder="10" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Facturar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

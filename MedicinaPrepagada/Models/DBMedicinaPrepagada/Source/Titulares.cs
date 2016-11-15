@@ -18,6 +18,7 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
         public Titulares()
         {
             this.Beneficiarios = new HashSet<Beneficiarios>();
+            this.Facturas = new HashSet<Facturas>();
         }
     
         public int id_titular { get; set; }
@@ -28,8 +29,9 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Beneficiarios> Beneficiarios { get; set; }
-        public virtual Facturas Facturas { get; set; }
         public virtual Membresias Membresias { get; set; }
         public virtual Pacientes Pacientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Facturas> Facturas { get; set; }
     }
 }

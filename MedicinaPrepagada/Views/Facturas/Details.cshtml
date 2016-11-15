@@ -1,0 +1,111 @@
+﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Facturas
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Factura</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Factura
+        </dt>
+
+        <dd>
+            @Model.id_factura
+        </dd>
+
+        <dt>
+            Fecha de factura
+        </dt>
+
+        <dd>
+            @Model.fecha_factura.ToString("yyyy-MM-dd")
+        </dd>
+
+        <dt>
+            Cliente
+        </dt>
+
+        <dd>
+            @Model.Titulares.Pacientes.nombre @Model.Titulares.Pacientes.apellidos
+        </dd>
+
+        <dt>
+            Membresia
+        </dt>
+
+        <dd>
+            @Model.Titulares.Membresias.descripcion
+        </dd>
+
+        <dt>
+            Periodo de facturación
+        </dt>
+
+        <dd>
+            @Model.fecha_factura_inicio.ToString("yyyy-MM-dd") - @Model.fecha_factura_fin.ToString("yyyy-MM-dd")
+        </dd>
+        
+        <dt>
+            Total a pagar
+        </dt>
+
+        <dd>
+            $ @ViewBag.total
+        </dd>
+
+        <dt>
+            Estado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+    </dl>
+
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Paciente
+        </th>
+        <th>
+            Membresia
+        </th>
+        <th>
+            Valor
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Model.Titulares.Pacientes.nombre @Model.Titulares.Pacientes.apellidos
+        </td>
+        <td>
+            @Model.Titulares.Membresias.descripcion
+        </td>
+        <td>
+            $ @Model.Titulares.Membresias.valor_mensual
+        </td>
+    </tr>
+    @foreach (var item in Model.Facturas_Beneficiarios)
+    {
+        <tr>
+            <td>
+                @item.Beneficiarios.Pacientes.nombre @item.Beneficiarios.Pacientes.apellidos
+            </td>
+            <td>
+                @item.Beneficiarios.Membresias.descripcion
+            </td>
+            <td>
+                $ @item.Beneficiarios.Membresias.valor_mensual
+            </td>
+        </tr>
+    }
+
+</table>
