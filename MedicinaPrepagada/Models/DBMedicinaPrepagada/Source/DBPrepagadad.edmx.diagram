@@ -22,7 +22,6 @@
         <AssociationConnector Association="DBPrepagadaModel.FK_Facturas_Beneficiarios_Beneficiarios" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Condiciones_Servicios" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Facturas_Beneficiarios_Facturas" />
-        <AssociationConnector Association="DBPrepagadaModel.FK_Facturas_Titulares" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Facturas_Beneficiarios_Membresias" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Negociaciones_IPS" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Ordenes_IPS" />
@@ -32,6 +31,7 @@
         <AssociationConnector Association="DBPrepagadaModel.FK_Ordenes_Pacientes" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Ordenes_Servicios" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Titulares_Pacientes" />
+        <AssociationConnector Association="DBPrepagadaModel.FK_Facturas_Titulares" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Facturas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listado de facturas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Factura
+        </th>
+        <th>
+            Fecha de factura
+        </th>
+        <th>
+           Cliente
+        </th>
+        <th>
+            Fecha de inicio de periodo
+        </th>
+        <th>
+            Fecha de fin de periodo
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.id_factura
+        </td>
+        <td>
+            @item.fecha_factura.ToString("yyyy-MM-dd")
+        </td>
+        <td>
+            @item.Titulares.Pacientes.nombre @item.Titulares.Pacientes.apellidos
+        </td>
+        <td>
+            @item.fecha_factura_inicio.ToString("yyyy-MM-dd")
+        </td>
+        <td>
+            @item.fecha_factura_fin.ToString("yyyy-MM-dd")
+        </td>
+        <td>
+            @Html.ActionLink("Factura", "Details", new { id=item.id_factura })
+        </td>
+    </tr>
+}
+
+</table>

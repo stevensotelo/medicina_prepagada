@@ -13,13 +13,7 @@ namespace MedicinaPrepagada.Controllers
     public class OrdenesController : Controller
     {
         private DBPrepagadaEntities db = new DBPrepagadaEntities();
-
-        // GET: Ordenes
-        public ActionResult Index()
-        {
-            var ordenes = db.Ordenes.Include(o => o.IPS).Include(o => o.Membresias).Include(o => o.Pacientes).Include(o => o.Servicios);
-            return View(ordenes.ToList());
-        }
+        
 
         // GET: Ordenes/Details/5
         public ActionResult Details(int? id)
