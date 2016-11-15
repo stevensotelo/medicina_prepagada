@@ -94,16 +94,16 @@ namespace MedicinaPrepagada.Controllers
         {
             try
             {
-                if (id == null)
+                Facturas factura = null;
+                if (id != null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    factura = db.Facturas.Find(id);
+                    double total = factura.valor_a_pagar;
+                    foreach (var b in factura.Facturas_Beneficiarios)
+                        total += b.valor_a_pagar;
+                    ViewBag.total = total;
                 }
-                IPS iPS = db.IPS.Find(id);
-                if (iPS == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(iPS);
+                return View(factura);
             }
             catch (Exception ex)
             {
@@ -116,25 +116,25 @@ namespace MedicinaPrepagada.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_ips,nombre,nit,telefono,nombre_contacto,apellidos_contacto,transferencia,numero_cuenta")] IPS iPS)
+        public ActionResult Edit(FormCollection form)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    if (!iPS.isValidated)
-                        throw new Exception();
-                    db.Entry(iPS).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                return View(iPS);
+                int id = int.Parse(form["id"]);
+                Facturas factura = db.Facturas.Single(p => p.id_factura == id);
+                factura.fecha_cancelado = DateTime.Now;
+                double total = factura.valor_a_pagar;
+                foreach (var b in factura.Facturas_Beneficiarios)
+                    total += b.valor_a_pagar;
+                factura.pagado = total;
+                factura.estado = "cancelado";
+                db.Entry(factura).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Edit", new { id = id });
             }
             catch (Exception ex)
             {
-                foreach (var issue in iPS.GetReglasValidacion())
-                    ModelState.AddModelError(issue.propiedad, issue.mensaje);
-                return View(iPS);
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
 
