@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - .:Medicina Prepagada:.</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -25,6 +25,8 @@
                     <li>@Html.ActionLink("Ordenes", "Create", "Ordenes")</li>
                     <li>@Html.ActionLink("Facturar", "Create", "Facturas")</li>
                     <li>@Html.ActionLink("Recaudar", "Edit", "Facturas")</li>
+                    <li>@Html.ActionLink("Titulares", "Index", "Titulares")</li>
+                    <li>@Html.ActionLink("Beneficiarios", "Index", "Beneficiarios")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +36,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - .:Medicina Prepagada:.</p>
         </footer>
     </div>
 

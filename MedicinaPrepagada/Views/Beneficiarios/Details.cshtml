@@ -1,0 +1,58 @@
+﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Beneficiarios
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Beneficiarios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.habilitado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.habilitado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_registro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_registro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Membresias.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Membresias.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pacientes.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pacientes.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulares.id_titular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulares.id_titular)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_beneficiario }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

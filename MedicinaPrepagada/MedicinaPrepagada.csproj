@@ -198,11 +198,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BeneficiariosController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IPSController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdenesController.cs" />
+    <Compile Include="Controllers\TitularesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +215,9 @@
       <DependentUpon>DBPrepagadad.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DBMedicinaPrepagada\Source\Condiciones.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Contacts.cs">
       <DependentUpon>DBPrepagadad.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DBMedicinaPrepagada\Source\DBPrepagadad.Context.cs">
@@ -354,6 +359,16 @@
     <Content Include="Views\Facturas\Details.cshtml" />
     <Content Include="Views\Facturas\Index.cshtml" />
     <Content Include="Views\Facturas\Edit.cshtml" />
+    <Content Include="Views\Titulares\Create.cshtml" />
+    <Content Include="Views\Titulares\Delete.cshtml" />
+    <Content Include="Views\Titulares\Details.cshtml" />
+    <Content Include="Views\Titulares\Edit.cshtml" />
+    <Content Include="Views\Titulares\Index.cshtml" />
+    <Content Include="Views\Beneficiarios\Create.cshtml" />
+    <Content Include="Views\Beneficiarios\Delete.cshtml" />
+    <Content Include="Views\Beneficiarios\Details.cshtml" />
+    <Content Include="Views\Beneficiarios\Edit.cshtml" />
+    <Content Include="Views\Beneficiarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

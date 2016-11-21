@@ -28,6 +28,17 @@
           <Property Name="cantidad_maxima_servicios" Type="int" Nullable="false" />
           <Property Name="genero" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar(max)" />
+          <Property Name="Apellidos" Type="nvarchar(max)" />
+          <Property Name="DocIdentificacion" Type="nvarchar(max)" />
+          <Property Name="Ciudad" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Facturas">
           <Key>
             <PropertyRef Name="id_factura" />
@@ -322,6 +333,7 @@
         <EntityContainer Name="DBPrepagadaModelStoreContainer">
           <EntitySet Name="Beneficiarios" EntityType="Self.Beneficiarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Condiciones" EntityType="Self.Condiciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas_Beneficiarios" EntityType="Self.Facturas_Beneficiarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IPS" EntityType="Self.IPS" Schema="dbo" store:Type="Tables" />
@@ -491,6 +503,7 @@
             <End Role="Titulares" EntitySet="Titulares" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="DBPrepagadaModel.Contacts" />
         </EntityContainer>
         <EntityType Name="Beneficiarios">
           <Key>
@@ -823,6 +836,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocIdentificacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ciudad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -962,6 +986,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Contacts">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="DocIdentificacion" ColumnName="DocIdentificacion" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -977,7 +1013,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
