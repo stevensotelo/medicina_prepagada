@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="80b5db2fa9074c858b06700326432737" Name="Diagram1" ZoomLevel="71">
+      <Diagram DiagramId="80b5db2fa9074c858b06700326432737" Name="Diagram1" ZoomLevel="46">
         <EntityTypeShape EntityType="DBPrepagadaModel.IPS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Beneficiarios" Width="1.5" PointX="7.625" PointY="11.125" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Condiciones" Width="1.5" PointX="2.5" PointY="6.75" />
@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="DBPrepagadaModel.Membresias" Width="1.5" PointX="5.375" PointY="7.625" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Negociaciones" Width="1.5" PointX="5.625" PointY="0.75" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Ordenes" Width="1.5" PointX="8.125" PointY="2.875" />
-        <EntityTypeShape EntityType="DBPrepagadaModel.Pacientes" Width="1.5" PointX="3.125" PointY="10.25" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.Pacientes" Width="1.5" PointX="3.125" PointY="10" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Servicios" Width="1.5" PointX="3.625" PointY="4" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Titulares" Width="1.5" PointX="11.375" PointY="5.875" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Beneficiarios_Membresias" />
@@ -33,6 +33,19 @@
         <AssociationConnector Association="DBPrepagadaModel.FK_Titulares_Pacientes" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Facturas_Titulares" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Contacts" Width="1.5" PointX="0.5" PointY="8.625" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.AspNetRoles" Width="1.5" PointX="12.875" PointY="2" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.AspNetUserClaims" Width="1.5" PointX="17.375" PointY="3.125" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.AspNetUserLogins" Width="1.5" PointX="17.375" PointY="0.625" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.AspNetUsers" Width="1.5" PointX="15.125" PointY="0.5" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.Bancos" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.Cuentas" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.CuentasXPagar" Width="1.5" PointX="10.75" PointY="2.375" />
+        <AssociationConnector Association="DBPrepagadaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DBPrepagadaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DBPrepagadaModel.FK_CuentasXPagar_IPS" />
+        <AssociationConnector Association="DBPrepagadaModel.FK_CuentasXPagar_Orden" />
+        <AssociationConnector Association="DBPrepagadaModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

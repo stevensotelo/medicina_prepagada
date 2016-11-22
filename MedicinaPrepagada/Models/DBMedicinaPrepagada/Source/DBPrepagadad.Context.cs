@@ -37,5 +37,13 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
         public virtual DbSet<Servicios> Servicios { get; set; }
         public virtual DbSet<Titulares> Titulares { get; set; }
         public virtual DbSet<Contacts> Contacts { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Bancos> Bancos { get; set; }
+        public virtual DbSet<Cuentas> Cuentas { get; set; }
+        public virtual DbSet<CuentasXPagar> CuentasXPagar { get; set; }
     }
 }

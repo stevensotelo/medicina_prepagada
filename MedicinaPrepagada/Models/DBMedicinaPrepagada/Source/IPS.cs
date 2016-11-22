@@ -19,6 +19,7 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
         {
             this.Negociaciones = new HashSet<Negociaciones>();
             this.Ordenes = new HashSet<Ordenes>();
+            this.CuentasXPagar = new HashSet<CuentasXPagar>();
         }
     
         public int id_ips { get; set; }
@@ -34,5 +35,7 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
         public virtual ICollection<Negociaciones> Negociaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordenes> Ordenes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CuentasXPagar> CuentasXPagar { get; set; }
     }
 }

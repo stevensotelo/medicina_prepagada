@@ -18,7 +18,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -199,6 +200,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BeneficiariosController.cs" />
+    <Compile Include="Controllers\CondicionesController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IPSController.cs" />
@@ -209,8 +212,24 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DBMedicinaPrepagada\Extended\Condiciones.cs" />
     <Compile Include="Models\DBMedicinaPrepagada\Extended\IPS.cs" />
     <Compile Include="Models\DBMedicinaPrepagada\Extended\Ordenes.cs" />
+    <Compile Include="Models\DBMedicinaPrepagada\Source\AspNetRoles.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\AspNetUserClaims.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\AspNetUserLogins.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\AspNetUsers.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Bancos.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DBMedicinaPrepagada\Source\Beneficiarios.cs">
       <DependentUpon>DBPrepagadad.tt</DependentUpon>
     </Compile>
@@ -218,6 +237,15 @@
       <DependentUpon>DBPrepagadad.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DBMedicinaPrepagada\Source\Contacts.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\Cuentas.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\CuentasXPagar.cs">
+      <DependentUpon>DBPrepagadad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBMedicinaPrepagada\Source\C__MigrationHistory.cs">
       <DependentUpon>DBPrepagadad.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DBMedicinaPrepagada\Source\DBPrepagadad.Context.cs">
@@ -369,9 +397,19 @@
     <Content Include="Views\Beneficiarios\Details.cshtml" />
     <Content Include="Views\Beneficiarios\Edit.cshtml" />
     <Content Include="Views\Beneficiarios\Index.cshtml" />
+    <Content Include="Views\Contacts\Create.cshtml" />
+    <Content Include="Views\Contacts\Delete.cshtml" />
+    <Content Include="Views\Contacts\Details.cshtml" />
+    <Content Include="Views\Contacts\Edit.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
+    <Content Include="Views\Condiciones\Create.cshtml" />
+    <Content Include="Views\Condiciones\Details.cshtml" />
+    <Content Include="Views\Condiciones\Edit.cshtml" />
+    <Content Include="Views\Condiciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -403,6 +441,8 @@
           <DevelopmentServerPort>5714</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:50830/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:50830/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -12,29 +12,18 @@ namespace MedicinaPrepagada.Models.DBMedicinaPrepagada.Source
     using System;
     using System.Collections.Generic;
     
-    public partial class Ordenes
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ordenes()
+        public AspNetRoles()
         {
-            this.CuentasXPagar = new HashSet<CuentasXPagar>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
-        public int id_orden { get; set; }
-        public int id_paciente { get; set; }
-        public int id_servicio { get; set; }
-        public int id_ips { get; set; }
-        public int id_membresia { get; set; }
-        public System.DateTime fecha_solicitud { get; set; }
-        public double valor_copago { get; set; }
-        public double valor_cuota_moderadora { get; set; }
-        public string estado { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
-        public virtual IPS IPS { get; set; }
-        public virtual Membresias Membresias { get; set; }
-        public virtual Pacientes Pacientes { get; set; }
-        public virtual Servicios Servicios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CuentasXPagar> CuentasXPagar { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

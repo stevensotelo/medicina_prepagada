@@ -78,9 +78,9 @@ namespace MedicinaPrepagada.Models
         [Display(Name = "Número de Identificación")]
         public string DocIdentificacion { get; set; }
 
-        //[Required]
-        //[Display(Name = "Rol")]
-        //public int Rol { get; set; }
+        [Required]
+        [Display(Name = "Ciudad")]
+        public string Ciudad { get; set; }
 
         [Required]
         [EmailAddress]
@@ -88,19 +88,14 @@ namespace MedicinaPrepagada.Models
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Fecha de Nacimiento")]
-        [DataType(DataType.Date)]
-        public string FechaNacimiento { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "La {0} debe tener mínimo {2} caracteres.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "El {0} debe tener mínimo {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar password")]
-        [Compare("Password", ErrorMessage = "El password no coincide con el password de confirmación.")]
+        [Compare("Password", ErrorMessage = "No coincide el password con el de confirmación.")]
         public string ConfirmPassword { get; set; }
 
     }
@@ -113,14 +108,14 @@ namespace MedicinaPrepagada.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "El {0} debe tener mínimo {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "No coincide el password con el de confirmación.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

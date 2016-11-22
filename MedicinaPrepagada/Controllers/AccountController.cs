@@ -23,6 +23,7 @@ namespace MedicinaPrepagada.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private DBPrepagadaEntities db = new DBPrepagadaEntities();
 
         public AccountController()
         {
@@ -158,7 +159,7 @@ namespace MedicinaPrepagada.Controllers
             if (ModelState.IsValid)
             {
 //                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var user = new ApplicationUser {UserName = model.Nombres ,Email = model.Email };
+                var user = new ApplicationUser {UserName = model.Nombres ,Email = model.Email, };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
