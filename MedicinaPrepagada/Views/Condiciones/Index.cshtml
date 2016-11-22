@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Condiciones>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Servicios.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.edad_minima)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.edad_maxima)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dias_afiliacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad_maxima_servicios)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.genero)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Servicios.descripcion)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.edad_minima)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.edad_maxima)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dias_afiliacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad_maxima_servicios)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.genero)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_condicion }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_condicion })
+            
+        </td>
+    </tr>
+}
+
+</table>

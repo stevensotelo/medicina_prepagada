@@ -5,6 +5,77 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBPrepagadaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="256" />
+          <Property Name="Ciudad" Type="nvarchar" MaxLength="50" />
+          <Property Name="DocIdentificacion" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="id_banco" />
+          </Key>
+          <Property Name="id_banco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
         <EntityType Name="Beneficiarios">
           <Key>
             <PropertyRef Name="id_beneficiario" />
@@ -27,6 +98,44 @@
           <Property Name="dias_afiliacion" Type="int" Nullable="false" />
           <Property Name="cantidad_maxima_servicios" Type="int" Nullable="false" />
           <Property Name="genero" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar(max)" />
+          <Property Name="Apellidos" Type="nvarchar(max)" />
+          <Property Name="DocIdentificacion" Type="nvarchar(max)" />
+          <Property Name="Ciudad" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Cuentas">
+          <Key>
+            <PropertyRef Name="id_cuenta" />
+          </Key>
+          <Property Name="id_cuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ips" Type="int" Nullable="false" />
+          <Property Name="id_orden" Type="int" Nullable="false" />
+          <Property Name="fecha_periodo_ini" Type="datetime" Nullable="false" />
+          <Property Name="fecha_periodo_fin" Type="datetime" Nullable="false" />
+          <Property Name="fecha_pago" Type="datetime" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="float" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="pagado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CuentasXPagar">
+          <Key>
+            <PropertyRef Name="id_cuenta" />
+          </Key>
+          <Property Name="id_cuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ips" Type="int" Nullable="false" />
+          <Property Name="id_orden" Type="int" Nullable="false" />
+          <Property Name="fecha_periodo_ini" Type="datetime" Nullable="false" />
+          <Property Name="fecha_periodo_fin" Type="datetime" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="float" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="pagado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Facturas">
           <Key>
@@ -175,6 +284,86 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CuentasXPagar_IPS">
+          <End Role="IPS" Type="Self.IPS" Multiplicity="1" />
+          <End Role="CuentasXPagar" Type="Self.CuentasXPagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IPS">
+              <PropertyRef Name="id_ips" />
+            </Principal>
+            <Dependent Role="CuentasXPagar">
+              <PropertyRef Name="id_ips" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CuentasXPagar_Orden">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="1" />
+          <End Role="CuentasXPagar" Type="Self.CuentasXPagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="id_orden" />
+            </Principal>
+            <Dependent Role="CuentasXPagar">
+              <PropertyRef Name="id_orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Facturas_Beneficiarios_Beneficiarios">
           <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="1" />
           <End Role="Facturas_Beneficiarios" Type="Self.Facturas_Beneficiarios" Multiplicity="*" />
@@ -320,8 +509,18 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBPrepagadaModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bancos" EntityType="Self.Bancos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Beneficiarios" EntityType="Self.Beneficiarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Condiciones" EntityType="Self.Condiciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuentas" EntityType="Self.Cuentas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuentasXPagar" EntityType="Self.CuentasXPagar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas_Beneficiarios" EntityType="Self.Facturas_Beneficiarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IPS" EntityType="Self.IPS" Schema="dbo" store:Type="Tables" />
@@ -346,6 +545,30 @@
           <AssociationSet Name="FK_Condiciones_Servicios" Association="Self.FK_Condiciones_Servicios">
             <End Role="Servicios" EntitySet="Servicios" />
             <End Role="Condiciones" EntitySet="Condiciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuentasXPagar_IPS" Association="Self.FK_CuentasXPagar_IPS">
+            <End Role="IPS" EntitySet="IPS" />
+            <End Role="CuentasXPagar" EntitySet="CuentasXPagar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuentasXPagar_Orden" Association="Self.FK_CuentasXPagar_Orden">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="CuentasXPagar" EntitySet="CuentasXPagar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_Beneficiarios_Beneficiarios" Association="Self.FK_Facturas_Beneficiarios_Beneficiarios">
             <End Role="Beneficiarios" EntitySet="Beneficiarios" />
@@ -414,6 +637,7 @@
           <Property Name="numero_cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Negociaciones" Relationship="DBPrepagadaModel.FK_Negociaciones_IPS" FromRole="IPS" ToRole="Negociaciones" />
           <NavigationProperty Name="Ordenes" Relationship="DBPrepagadaModel.FK_Ordenes_IPS" FromRole="IPS" ToRole="Ordenes" />
+          <NavigationProperty Name="CuentasXPagar" Relationship="DBPrepagadaModel.FK_CuentasXPagar_IPS" FromRole="IPS" ToRole="CuentasXPagar" />
         </EntityType>
         <EntityContainer Name="DBPrepagadaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="IPS" EntityType="Self.IPS" />
@@ -490,6 +714,35 @@
           <AssociationSet Name="FK_Facturas_Titulares" Association="DBPrepagadaModel.FK_Facturas_Titulares">
             <End Role="Titulares" EntitySet="Titulares" />
             <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="DBPrepagadaModel.Contacts" />
+          <EntitySet Name="C__MigrationHistory" EntityType="DBPrepagadaModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="DBPrepagadaModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="DBPrepagadaModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="DBPrepagadaModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="DBPrepagadaModel.AspNetUsers" />
+          <EntitySet Name="Bancos" EntityType="DBPrepagadaModel.Bancos" />
+          <EntitySet Name="Cuentas" EntityType="DBPrepagadaModel.Cuentas" />
+          <EntitySet Name="CuentasXPagar" EntityType="DBPrepagadaModel.CuentasXPagar" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="DBPrepagadaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="DBPrepagadaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuentasXPagar_IPS" Association="DBPrepagadaModel.FK_CuentasXPagar_IPS">
+            <End Role="IPS" EntitySet="IPS" />
+            <End Role="CuentasXPagar" EntitySet="CuentasXPagar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuentasXPagar_Orden" Association="DBPrepagadaModel.FK_CuentasXPagar_Orden">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="CuentasXPagar" EntitySet="CuentasXPagar" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="DBPrepagadaModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Beneficiarios">
@@ -592,6 +845,7 @@
           <NavigationProperty Name="Membresias" Relationship="DBPrepagadaModel.FK_Ordenes_Membresias" FromRole="Ordenes" ToRole="Membresias" />
           <NavigationProperty Name="Pacientes" Relationship="DBPrepagadaModel.FK_Ordenes_Pacientes" FromRole="Ordenes" ToRole="Pacientes" />
           <NavigationProperty Name="Servicios" Relationship="DBPrepagadaModel.FK_Ordenes_Servicios" FromRole="Ordenes" ToRole="Servicios" />
+          <NavigationProperty Name="CuentasXPagar" Relationship="DBPrepagadaModel.FK_CuentasXPagar_Orden" FromRole="Ordenes" ToRole="CuentasXPagar" />
         </EntityType>
         <EntityType Name="Pacientes">
           <Key>
@@ -823,6 +1077,144 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocIdentificacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ciudad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DBPrepagadaModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DBPrepagadaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DBPrepagadaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DocIdentificacion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="DBPrepagadaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="DBPrepagadaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="DBPrepagadaModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="id_banco" />
+          </Key>
+          <Property Name="id_banco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Cuentas">
+          <Key>
+            <PropertyRef Name="id_cuenta" />
+          </Key>
+          <Property Name="id_cuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ips" Type="Int32" Nullable="false" />
+          <Property Name="id_orden" Type="Int32" Nullable="false" />
+          <Property Name="fecha_periodo_ini" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_periodo_fin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_pago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="valor_a_pagar" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pagado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CuentasXPagar">
+          <Key>
+            <PropertyRef Name="id_cuenta" />
+          </Key>
+          <Property Name="id_cuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_periodo_ini" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_periodo_fin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="valor_a_pagar" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pagado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="IPS" Relationship="DBPrepagadaModel.FK_CuentasXPagar_IPS" FromRole="CuentasXPagar" ToRole="IPS" />
+          <NavigationProperty Name="Ordenes" Relationship="DBPrepagadaModel.FK_CuentasXPagar_Orden" FromRole="CuentasXPagar" ToRole="Ordenes" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="DBPrepagadaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DBPrepagadaModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="DBPrepagadaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DBPrepagadaModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CuentasXPagar_IPS">
+          <End Type="DBPrepagadaModel.IPS" Role="IPS" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.CuentasXPagar" Role="CuentasXPagar" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CuentasXPagar_Orden">
+          <End Type="DBPrepagadaModel.Ordenes" Role="Ordenes" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.CuentasXPagar" Role="CuentasXPagar" Multiplicity="*" />
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="DBPrepagadaModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="DBPrepagadaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -962,6 +1354,142 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Contacts">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="DocIdentificacion" ColumnName="DocIdentificacion" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="DocIdentificacion" ColumnName="DocIdentificacion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bancos">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Bancos">
+              <MappingFragment StoreEntitySet="Bancos">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_banco" ColumnName="id_banco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuentas">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Cuentas">
+              <MappingFragment StoreEntitySet="Cuentas">
+                <ScalarProperty Name="pagado" ColumnName="pagado" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="valor_a_pagar" ColumnName="valor_a_pagar" />
+                <ScalarProperty Name="fecha_pago" ColumnName="fecha_pago" />
+                <ScalarProperty Name="fecha_periodo_fin" ColumnName="fecha_periodo_fin" />
+                <ScalarProperty Name="fecha_periodo_ini" ColumnName="fecha_periodo_ini" />
+                <ScalarProperty Name="id_orden" ColumnName="id_orden" />
+                <ScalarProperty Name="id_ips" ColumnName="id_ips" />
+                <ScalarProperty Name="id_cuenta" ColumnName="id_cuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuentasXPagar">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.CuentasXPagar">
+              <MappingFragment StoreEntitySet="CuentasXPagar">
+                <ScalarProperty Name="pagado" ColumnName="pagado" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="valor_a_pagar" ColumnName="valor_a_pagar" />
+                <ScalarProperty Name="fecha_periodo_fin" ColumnName="fecha_periodo_fin" />
+                <ScalarProperty Name="fecha_periodo_ini" ColumnName="fecha_periodo_ini" />
+                <ScalarProperty Name="id_cuenta" ColumnName="id_cuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" TypeName="DBPrepagadaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" StoreEntitySet="AspNetUserClaims">
+            <EndProperty Name="AspNetUserClaims">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CuentasXPagar_IPS" TypeName="DBPrepagadaModel.FK_CuentasXPagar_IPS" StoreEntitySet="CuentasXPagar">
+            <EndProperty Name="CuentasXPagar">
+              <ScalarProperty Name="id_cuenta" ColumnName="id_cuenta" />
+            </EndProperty>
+            <EndProperty Name="IPS">
+              <ScalarProperty Name="id_ips" ColumnName="id_ips" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CuentasXPagar_Orden" TypeName="DBPrepagadaModel.FK_CuentasXPagar_Orden" StoreEntitySet="CuentasXPagar">
+            <EndProperty Name="CuentasXPagar">
+              <ScalarProperty Name="id_cuenta" ColumnName="id_cuenta" />
+            </EndProperty>
+            <EndProperty Name="Ordenes">
+              <ScalarProperty Name="id_orden" ColumnName="id_orden" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DBPrepagadaModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -977,7 +1505,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

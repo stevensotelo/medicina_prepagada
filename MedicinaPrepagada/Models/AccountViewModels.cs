@@ -64,21 +64,40 @@ namespace MedicinaPrepagada.Models
 
     public class RegisterViewModel
     {
+        public int ContactId { get; set; }
+
+        [Required]
+        [Display(Name = "Nombres")]
+        public string Nombres { get; set; }
+
+        [Required]
+        [Display(Name = "Apellidos")]
+        public string Apellidos { get; set; }
+
+        [Required]
+        [Display(Name = "Número de Identificación")]
+        public string DocIdentificacion { get; set; }
+
+        [Required]
+        [Display(Name = "Ciudad")]
+        public string Ciudad { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "El {0} debe tener mínimo {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmar password")]
+        [Compare("Password", ErrorMessage = "No coincide el password con el de confirmación.")]
         public string ConfirmPassword { get; set; }
+
     }
 
     public class ResetPasswordViewModel
@@ -89,14 +108,14 @@ namespace MedicinaPrepagada.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "El {0} debe tener mínimo {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "No coincide el password con el de confirmación.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

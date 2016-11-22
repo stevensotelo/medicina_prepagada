@@ -10,6 +10,12 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MedicinaPrepagada.Models;
 
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Net;
+using MedicinaPrepagada.Models.DBMedicinaPrepagada.Source;
+
 namespace MedicinaPrepagada.Controllers
 {
     [Authorize]
@@ -17,6 +23,7 @@ namespace MedicinaPrepagada.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private DBPrepagadaEntities db = new DBPrepagadaEntities();
 
         public AccountController()
         {
@@ -151,7 +158,9 @@ namespace MedicinaPrepagada.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+//                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {UserName = model.Nombres ,Email = model.Email, };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

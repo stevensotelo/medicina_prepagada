@@ -1,0 +1,66 @@
+﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Condiciones
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Condiciones</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.edad_minima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.edad_minima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.edad_maxima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.edad_maxima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dias_afiliacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dias_afiliacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad_maxima_servicios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad_maxima_servicios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Servicios.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servicios.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_condicion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

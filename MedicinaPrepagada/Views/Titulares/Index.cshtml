@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Titulares>
+
+@{
+    ViewBag.Title = "Titulares";
+}
+
+<h2>Titulares</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Pacientes.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Membresias.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_registro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.habilitado)
+        </th>
+        
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pacientes.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Membresias.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_registro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.habilitado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_titular }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_titular }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_titular })
+        </td>
+    </tr>
+}
+
+</table>
