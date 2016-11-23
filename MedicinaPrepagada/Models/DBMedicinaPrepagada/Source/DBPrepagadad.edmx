@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBPrepagadaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="id_banco" />
+          </Key>
+          <Property Name="id_banco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
         <EntityType Name="Beneficiarios">
           <Key>
             <PropertyRef Name="id_beneficiario" />
@@ -26,7 +33,30 @@
           <Property Name="edad_maxima" Type="int" Nullable="false" />
           <Property Name="dias_afiliacion" Type="int" Nullable="false" />
           <Property Name="cantidad_maxima_servicios" Type="int" Nullable="false" />
-          <Property Name="genero" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="genero" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar(max)" />
+          <Property Name="Apellidos" Type="nvarchar(max)" />
+          <Property Name="DocIdentificacion" Type="nvarchar(max)" />
+          <Property Name="Ciudad" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CuentasXPagar">
+          <Key>
+            <PropertyRef Name="id_cuenta" />
+          </Key>
+          <Property Name="id_cuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ips" Type="int" Nullable="false" />
+          <Property Name="fecha_periodo_ini" Type="datetime" Nullable="false" />
+          <Property Name="fecha_periodo_fin" Type="datetime" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="float" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="pagado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Facturas">
           <Key>
@@ -175,6 +205,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CuentasXPagar_IPS">
+          <End Role="IPS" Type="Self.IPS" Multiplicity="1" />
+          <End Role="CuentasXPagar" Type="Self.CuentasXPagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IPS">
+              <PropertyRef Name="id_ips" />
+            </Principal>
+            <Dependent Role="CuentasXPagar">
+              <PropertyRef Name="id_ips" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Facturas_Beneficiarios_Beneficiarios">
           <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="1" />
           <End Role="Facturas_Beneficiarios" Type="Self.Facturas_Beneficiarios" Multiplicity="*" />
@@ -320,8 +362,11 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBPrepagadaModelStoreContainer">
+          <EntitySet Name="Bancos" EntityType="Self.Bancos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Beneficiarios" EntityType="Self.Beneficiarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Condiciones" EntityType="Self.Condiciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuentasXPagar" EntityType="Self.CuentasXPagar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas_Beneficiarios" EntityType="Self.Facturas_Beneficiarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IPS" EntityType="Self.IPS" Schema="dbo" store:Type="Tables" />
@@ -346,6 +391,10 @@
           <AssociationSet Name="FK_Condiciones_Servicios" Association="Self.FK_Condiciones_Servicios">
             <End Role="Servicios" EntitySet="Servicios" />
             <End Role="Condiciones" EntitySet="Condiciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuentasXPagar_IPS" Association="Self.FK_CuentasXPagar_IPS">
+            <End Role="IPS" EntitySet="IPS" />
+            <End Role="CuentasXPagar" EntitySet="CuentasXPagar" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_Beneficiarios_Beneficiarios" Association="Self.FK_Facturas_Beneficiarios_Beneficiarios">
             <End Role="Beneficiarios" EntitySet="Beneficiarios" />
@@ -414,6 +463,7 @@
           <Property Name="numero_cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Negociaciones" Relationship="DBPrepagadaModel.FK_Negociaciones_IPS" FromRole="IPS" ToRole="Negociaciones" />
           <NavigationProperty Name="Ordenes" Relationship="DBPrepagadaModel.FK_Ordenes_IPS" FromRole="IPS" ToRole="Ordenes" />
+          <NavigationProperty Name="CuentasXPagar" Relationship="DBPrepagadaModel.FK_CuentasXPagar_IPS" FromRole="IPS" ToRole="CuentasXPagar" />
         </EntityType>
         <EntityContainer Name="DBPrepagadaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="IPS" EntityType="Self.IPS" />
@@ -491,7 +541,14 @@
             <End Role="Titulares" EntitySet="Titulares" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Bancos" EntityType="DBPrepagadaModel.Bancos" />
+          <EntitySet Name="Contacts" EntityType="DBPrepagadaModel.Contacts" />
+          <EntitySet Name="CuentasXPagar" EntityType="DBPrepagadaModel.CuentasXPagar" />
+          <AssociationSet Name="FK_CuentasXPagar_IPS" Association="DBPrepagadaModel.FK_CuentasXPagar_IPS">
+            <End Role="IPS" EntitySet="IPS" />
+            <End Role="CuentasXPagar" EntitySet="CuentasXPagar" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Beneficiarios">
           <Key>
             <PropertyRef Name="id_beneficiario" />
@@ -517,7 +574,7 @@
           <Property Name="edad_maxima" Type="Int32" Nullable="false" />
           <Property Name="dias_afiliacion" Type="Int32" Nullable="false" />
           <Property Name="cantidad_maxima_servicios" Type="Int32" Nullable="false" />
-          <Property Name="genero" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="genero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Servicios" Relationship="DBPrepagadaModel.FK_Condiciones_Servicios" FromRole="Condiciones" ToRole="Servicios" />
         </EntityType>
         <EntityType Name="Facturas">
@@ -823,7 +880,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="id_banco" />
+          </Key>
+          <Property Name="id_banco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocIdentificacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ciudad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CuentasXPagar">
+          <Key>
+            <PropertyRef Name="id_cuenta" />
+          </Key>
+          <Property Name="id_cuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ips" Type="Int32" Nullable="false" />
+          <Property Name="fecha_periodo_ini" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_periodo_fin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="valor_a_pagar" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pagado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="IPS" Relationship="DBPrepagadaModel.FK_CuentasXPagar_IPS" FromRole="CuentasXPagar" ToRole="IPS" />
+        </EntityType>
+        <Association Name="FK_CuentasXPagar_IPS">
+          <End Type="DBPrepagadaModel.IPS" Role="IPS" Multiplicity="1" />
+          <End Type="DBPrepagadaModel.CuentasXPagar" Role="CuentasXPagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IPS">
+              <PropertyRef Name="id_ips" />
+            </Principal>
+            <Dependent Role="CuentasXPagar">
+              <PropertyRef Name="id_ips" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -959,6 +1059,39 @@
                 <ScalarProperty Name="id_membresia" ColumnName="id_membresia" />
                 <ScalarProperty Name="id_paciente" ColumnName="id_paciente" />
                 <ScalarProperty Name="id_titular" ColumnName="id_titular" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bancos">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Bancos">
+              <MappingFragment StoreEntitySet="Bancos">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_banco" ColumnName="id_banco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.Contacts">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="DocIdentificacion" ColumnName="DocIdentificacion" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuentasXPagar">
+            <EntityTypeMapping TypeName="DBPrepagadaModel.CuentasXPagar">
+              <MappingFragment StoreEntitySet="CuentasXPagar">
+                <ScalarProperty Name="pagado" ColumnName="pagado" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="valor_a_pagar" ColumnName="valor_a_pagar" />
+                <ScalarProperty Name="fecha_periodo_fin" ColumnName="fecha_periodo_fin" />
+                <ScalarProperty Name="fecha_periodo_ini" ColumnName="fecha_periodo_ini" />
+                <ScalarProperty Name="id_ips" ColumnName="id_ips" />
+                <ScalarProperty Name="id_cuenta" ColumnName="id_cuenta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

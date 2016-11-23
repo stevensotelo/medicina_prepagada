@@ -10,10 +10,10 @@
         <EntityTypeShape EntityType="DBPrepagadaModel.Condiciones" Width="1.5" PointX="5.625" PointY="13.25" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Facturas" Width="1.5" PointX="10.875" PointY="7" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Facturas_Beneficiarios" Width="1.5" PointX="13.125" PointY="8.25" />
-        <EntityTypeShape EntityType="DBPrepagadaModel.Membresias" Width="1.5" PointX="3.375" PointY="7.25" />
-        <EntityTypeShape EntityType="DBPrepagadaModel.Negociaciones" Width="1.5" PointX="5.625" PointY="0.75" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.Membresias" Width="1.5" PointX="2.625" PointY="7.25" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.Negociaciones" Width="1.5" PointX="4.875" PointY="0.625" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Ordenes" Width="1.5" PointX="5.625" PointY="4.375" />
-        <EntityTypeShape EntityType="DBPrepagadaModel.Pacientes" Width="1.5" PointX="3.375" PointY="11.25" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.Pacientes" Width="1.5" PointX="0.5" PointY="12.375" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Servicios" Width="1.5" PointX="3.375" PointY="3.375" />
         <EntityTypeShape EntityType="DBPrepagadaModel.Titulares" Width="1.5" PointX="8.625" PointY="7.125" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Beneficiarios_Membresias" />
@@ -32,7 +32,11 @@
         <AssociationConnector Association="DBPrepagadaModel.FK_Ordenes_Servicios" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Titulares_Pacientes" />
         <AssociationConnector Association="DBPrepagadaModel.FK_Facturas_Titulares" />
-      </Diagram>
+        <EntityTypeShape EntityType="DBPrepagadaModel.Bancos" Width="1.5" PointX="0.5" PointY="6.875" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.Contacts" Width="1.5" PointX="0.5" PointY="9.375" />
+        <EntityTypeShape EntityType="DBPrepagadaModel.CuentasXPagar" Width="1.5" PointX="3" PointY="11" />
+        <AssociationConnector Association="DBPrepagadaModel.FK_CuentasXPagar_IPS" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

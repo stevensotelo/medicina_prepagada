@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Plano";
+}
+
+<h2>Plano</h2>
+
+
+@using (Html.BeginForm("Plano", "Cuenta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input id="file" type="file" name="file" />
+    <button type="submit"> Subir Archivo</button>
+    
+}
+<p style="color:red;">@ViewData["message"]</p>
+
+<p>
+    @Html.ActionLink("Validar Cuenta", "Details")
+</p>
+

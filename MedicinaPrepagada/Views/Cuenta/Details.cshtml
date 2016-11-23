@@ -1,0 +1,64 @@
+﻿
+@model  IEnumerable<MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.CuentasXPagar>
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+
+<h2>Listar</h2>
+
+</select>
+    <p>
+        <table class="table">
+            <tr>
+                <th>
+                    Fecha Inicio
+                </th>
+                <th>
+                    Fecha Fin
+                </th>
+                <th>
+                    IPS
+                </th>
+                <th>
+                    Autorizado
+                </th>
+                <th>
+                    Valor
+                </th>
+                <th></th>
+            </tr>
+          
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fecha_periodo_ini)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fecha_periodo_fin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id_ips)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.valor_a_pagar)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Autorizar", "Edit", new { id = item.id_cuenta })
+                    </td>
+                </tr>
+            }
+        </table>
+    </p>
+
+
+

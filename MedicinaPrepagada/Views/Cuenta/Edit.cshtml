@@ -1,0 +1,73 @@
+﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.CuentasXPagar
+
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Autorizar</h2>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var n = "@Html.DisplayFor( model=>model.estado)";
+        alert(n);
+    })
+</script>
+
+@using (Html.BeginForm())
+{
+    <div class= "form-horizontal">
+        <h4>Cuentas por Pagar</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger"})
+        @Html.HiddenFor(model => model.id_cuenta)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fecha_periodo_ini, htmlAttributes: new { @class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fecha_periodo_ini, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fecha_periodo_ini, "", new { @class = "text-danger"})
+            </div>
+            
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fecha_periodo_fin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fecha_periodo_fin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fecha_periodo_fin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_ips, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id_ips, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.id_ips, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("1","Choose")
+                <select id="cboAut" class="form-control" value="@Html.DisplayFor( model=>model.estado)">
+                    <option value="1">Autorizado</option>
+                    <option value="0">No Autorizado</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.valor_a_pagar, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.valor_a_pagar, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.valor_a_pagar, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+    </div>
+}
+
