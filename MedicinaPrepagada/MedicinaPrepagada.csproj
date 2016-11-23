@@ -206,6 +206,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IPSController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NegociacionesController.cs" />
     <Compile Include="Controllers\OrdenesController.cs" />
     <Compile Include="Controllers\TitularesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -303,6 +304,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\home.jpg" />
+    <Content Include="Images\ips.png" />
+    <Content Include="Images\membresias.jpg" />
+    <Content Include="Images\servicios.jpg" />
     <Content Include="Models\DBMedicinaPrepagada\Source\DBPrepagadad.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBPrepagadad.edmx</DependentUpon>
@@ -406,6 +411,11 @@
     <Content Include="Views\Condiciones\Details.cshtml" />
     <Content Include="Views\Condiciones\Edit.cshtml" />
     <Content Include="Views\Condiciones\Index.cshtml" />
+    <Content Include="Views\Negociaciones\Create.cshtml" />
+    <Content Include="Views\Negociaciones\Delete.cshtml" />
+    <Content Include="Views\Negociaciones\Details.cshtml" />
+    <Content Include="Views\Negociaciones\Edit.cshtml" />
+    <Content Include="Views\Negociaciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
