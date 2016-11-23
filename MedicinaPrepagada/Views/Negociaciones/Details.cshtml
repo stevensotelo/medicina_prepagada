@@ -1,0 +1,51 @@
+﻿@model MedicinaPrepagada.Models.DBMedicinaPrepagada.Source.Negociaciones
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Negociaciones</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.habilitado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.habilitado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IPS.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IPS.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Servicios.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servicios.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_negociacion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
